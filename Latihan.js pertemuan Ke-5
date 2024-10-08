@@ -1,4 +1,4 @@
-// Definisi kelas Orang
+// Definisi kelas Orang (induk)
 class Orang {
     constructor(nama, alamat) {
         this.nama = nama;
@@ -14,10 +14,10 @@ class Orang {
     }
 }
 
-// Definisi kelas Mahasiswa yang merupakan turunan dari Orang
+// Definisi kelas Mahasiswa (turunan dari Orang)
 class Mahasiswa extends Orang {
     constructor(nama, alamat, nim) {
-        super(nama, alamat);
+        super(nama, alamat);  // Memanggil konstruktor kelas induk
         this.nim = nim;
     }
 
@@ -30,10 +30,10 @@ class Mahasiswa extends Orang {
     }
 }
 
-// Definisi kelas Dosen yang merupakan turunan dari Orang
+// Definisi kelas Dosen (turunan dari Orang)
 class Dosen extends Orang {
     constructor(nama, alamat, nidn) {
-        super(nama, alamat);
+        super(nama, alamat);  // Memanggil konstruktor kelas induk
         this.nidn = nidn;
     }
 
@@ -46,14 +46,33 @@ class Dosen extends Orang {
     }
 }
 
-// Definisi OrangView untuk render informasi
-class OrangView {
-    render(orang) {
-        return orang.tampilkanInformasi();
+// Definisi kelas Guru (turunan dari Orang)
+class Guru extends Orang {
+    constructor(nama, alamat, nuptk) {
+        super(nama, alamat);  // Memanggil konstruktor kelas induk
+        this.nuptk = nuptk;
+    }
+
+    tampilkanInformasi() {
+        return `${super.tampilkanInformasi()}, NUPTK: ${this.nuptk}`;
+    }
+
+    tampilkanPeran() {
+        return "Peran: Guru";
     }
 }
 
-// Definisi OrangController untuk mengatur tampilan
+// Definisi OrangView untuk menampilkan data
+class OrangView {
+    render(orang) {
+        return `
+${orang.tampilkanInformasi()}
+${orang.tampilkanPeran()}
+        `;
+    }
+}
+
+// Definisi OrangController untuk mengelola interaksi model dan view
 class OrangController {
     constructor(model, view) {
         this.model = model;
@@ -62,22 +81,26 @@ class OrangController {
 
     tampilkanOrang() {
         const mahasiswa = new this.model.Mahasiswa("Renaldi Sentosa", "KP. Cibereum", "202301110010");
-        const dosen = new this.model.Dosen("Pak Junaidi", "Jl. Gandoang", "202301110020");
+        const dosen = new this.model.Dosen("Pak Junaedi", "Jl. Gandoang", "202301110020");
+        const guru = new this.model.Guru("Ibu Siti", "Jl. Singkal", "202301110030");
 
         console.log(this.view.render(mahasiswa));
         console.log(this.view.render(dosen));
+        console.log(this.view.render(guru));
     }
 }
 
-// Inisialisasi dan Penggunaan
-const orangController = new OrangController({ Mahasiswa, Dosen }, new OrangView());
+// Inisialisasi dan Penggunaan Controller
+const orangController = new OrangController({ Mahasiswa, Dosen, Guru }, new OrangView());
 orangController.tampilkanOrang();
 
-// Demonstrasi Polimorfisme
-const orang1 = new Orang("Orang Biasa", "Jl. Biasa");
-const mahasiswa1 = new Mahasiswa("Ani", "Jl. Pendidikan", "987654");
-const dosen1 = new Dosen("Bu Susi", "Jl. Ilmu", "456789");
+// Menggunakan polimorfisme (memeriksa peran)
+const orang1 = new Orang("Dika", "Jl. Sudirman");
+const mahasiswa1 = new Mahasiswa("Renaldi Sentosa", "KP. Cibereum", "202301110010");
+const dosen1 = new Dosen("Pak Junaedi", "Jl. Gandoang", "202301110020");
+const guru1 = new Guru("Ibu Siti", "Jl. Singkal", "202301110030");
 
 console.log(orang1.tampilkanPeran());    // Output: Peran: Orang biasa
 console.log(mahasiswa1.tampilkanPeran()); // Output: Peran: Mahasiswa
 console.log(dosen1.tampilkanPeran());     // Output: Peran: Dosen
+console.log(guru1.tampilkanPeran());      // Output: Peran: Guru
