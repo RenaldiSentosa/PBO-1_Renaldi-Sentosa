@@ -1,0 +1,57 @@
+// Inisialisasi Map sebagai "database" sementara
+let items = new Map();
+
+// Fungsi CREATE - Menambahkan item ke dalam Map
+function createItem(key, value) {
+    if (!items.has(key)) {
+        items.set(key, value);
+        console.log(`Item dengan kunci "${key}" berhasil ditambahkan.`);
+    } else {
+        console.log(`Item dengan kunci "${key}" sudah ada.`);
+    }
+}
+
+// Fungsi READ - Menampilkan semua item di dalam Map
+function readItems() {
+    if (items.size === 0) {
+        console.log("Tidak ada item dalam daftar.");
+    } else {
+        console.log("Daftar Item:");
+        items.forEach((value, key) => {
+            console.log(`${key}: ${value}`);
+        });
+    }
+}
+
+// Fungsi UPDATE - Mengubah nilai item berdasarkan kunci
+function updateItem(key, newValue) {
+    if (items.has(key)) {
+        items.set(key, newValue);
+        console.log(`Item dengan kunci "${key}" diubah menjadi "${newValue}".`);
+    } else {
+        console.log(`Item dengan kunci "${key}" tidak ditemukan.`);
+    }
+}
+
+// Fungsi DELETE - Menghapus item berdasarkan kunci
+function deleteItem(key) {
+    if (items.has(key)) {
+        items.delete(key);
+        console.log(`Item dengan kunci "${key}" berhasil dihapus.`);
+    } else {
+        console.log(`Item dengan kunci "${key}" tidak ditemukan.`);
+    }
+}
+
+// Contoh penggunaan fungsi CRUD
+createItem("id1", "Buku");
+createItem("id2", "Pensil");
+createItem("id3", "Penghapus");
+
+readItems(); // Tampilkan semua item
+
+updateItem("id2", "Pulpen"); // Ubah item dengan kunci "id2"
+
+deleteItem("id1"); // Hapus item dengan kunci "id1"
+
+readItems(); // Tampilkan semua item setelah perubahan
