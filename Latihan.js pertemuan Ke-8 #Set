@@ -1,0 +1,58 @@
+// Inisialisasi Set sebagai "database" sementara
+let items = new Set();
+
+// Fungsi CREATE - Menambahkan item ke dalam Set
+function createItem(item) {
+    if (!items.has(item)) {
+        items.add(item);
+        console.log(`Item "${item}" berhasil ditambahkan.`);
+    } else {
+        console.log(`Item "${item}" sudah ada dalam daftar.`);
+    }
+}
+
+// Fungsi READ - Menampilkan semua item di dalam Set
+function readItems() {
+    if (items.size === 0) {
+        console.log("Tidak ada item dalam daftar.");
+    } else {
+        console.log("Daftar Item:");
+        items.forEach(item => {
+            console.log(`- ${item}`);
+        });
+    }
+}
+
+// Fungsi UPDATE - Mengubah item dalam Set
+function updateItem(oldItem, newItem) {
+    if (items.has(oldItem)) {
+        items.delete(oldItem);   // Hapus item lama
+        items.add(newItem);      // Tambahkan item baru
+        console.log(`Item "${oldItem}" diubah menjadi "${newItem}".`);
+    } else {
+        console.log(`Item "${oldItem}" tidak ditemukan.`);
+    }
+}
+
+// Fungsi DELETE - Menghapus item dari Set
+function deleteItem(item) {
+    if (items.has(item)) {
+        items.delete(item);
+        console.log(`Item "${item}" berhasil dihapus.`);
+    } else {
+        console.log(`Item "${item}" tidak ditemukan.`);
+    }
+}
+
+// Contoh penggunaan fungsi CRUD
+createItem("Buku");
+createItem("Pensil");
+createItem("Penghapus");
+
+readItems(); // Tampilkan semua item
+
+updateItem("Pensil", "Pulpen"); // Ubah item "Pensil" menjadi "Pulpen"
+
+deleteItem("Buku"); // Hapus item "Buku"
+
+readItems(); // Tampilkan semua item setelah perubahan
