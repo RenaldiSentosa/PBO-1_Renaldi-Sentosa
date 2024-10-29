@@ -1,0 +1,54 @@
+// Array awal sebagai database sementara
+let items = [];
+
+// Fungsi CREATE - Menambahkan item ke dalam array
+function createItem(item) {
+    items.push(item);
+    console.log(`Item "${item}" berhasil ditambahkan.`);
+}
+
+// Fungsi READ - Menampilkan semua item di dalam array
+function readItems() {
+    if (items.length === 0) {
+        console.log("Tidak ada item dalam daftar.");
+    } else {
+        console.log("Daftar Item:");
+        items.forEach((item, index) => {
+            console.log(`${index + 1}. ${item}`);
+        });
+    }
+}
+
+// Fungsi UPDATE - Mengubah item berdasarkan indeks
+function updateItem(index, newItem) {
+    if (index >= 0 && index < items.length) {
+        const oldItem = items[index];
+        items[index] = newItem;
+        console.log(`Item "${oldItem}" diubah menjadi "${newItem}".`);
+    } else {
+        console.log("Indeks tidak ditemukan.");
+    }
+}
+
+// Fungsi DELETE - Menghapus item berdasarkan indeks
+function deleteItem(index) {
+    if (index >= 0 && index < items.length) {
+        const removedItem = items.splice(index, 1);
+        console.log(`Item "${removedItem}" berhasil dihapus.`);
+    } else {
+        console.log("Indeks tidak ditemukan.");
+    }
+}
+
+// Contoh penggunaan fungsi CRUD
+createItem("Buku");
+createItem("Pensil");
+createItem("Penghapus");
+
+readItems(); // Tampilkan semua item
+
+updateItem(1, "Pulpen"); // Ubah item di indeks 1
+
+deleteItem(0); // Hapus item di indeks 0
+
+readItems(); // Tampilkan semua item setelah perubahan
