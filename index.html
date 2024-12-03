@@ -9,58 +9,6 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #fff8e1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            height: 100%;
-        }
-
-        .login-container, .dashboard-container {
-            display: none;
-            padding: 20px;
-            border-radius: 10px;
-            background: #ffcc80;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 400px;
-            margin: auto;
-        }
-
-        .login-container.active, .dashboard-container.active {
-            display: block;
-        }
-
-        h1, h2 {
-            color: #bf360c;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ff7043;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff7043;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #d84315;
         }
 
         .sidebar {
@@ -93,11 +41,16 @@
             text-decoration: underline;
         }
 
+        .main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
         .cards-container {
             display: flex;
             gap: 20px;
             justify-content: space-around;
-            margin-top: 20px;
+            margin-top: 50px;
         }
 
         .card {
@@ -110,13 +63,14 @@
         }
 
         .card img {
-            width: 50px;
-            height: 50px;
+            width: 80px;
+            height: 80px;
             margin-bottom: 10px;
         }
 
         .card h3 {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            color: #bf360c;
         }
 
         .card p {
@@ -126,7 +80,7 @@
         }
 
         footer {
-            margin-top: 20px;
+            margin-top: 50px;
             text-align: center;
             font-size: 14px;
             color: gray;
@@ -134,79 +88,34 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Login Section -->
-        <div class="login-container active" id="login">
-            <h1>Login</h1>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <button id="loginBtn">Login</button>
+    <div>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h1>Menu</h1>
+            <a href="#">Dashboard</a>
         </div>
 
-        <!-- Dashboard Section -->
-        <div class="dashboard-container" id="dashboard">
-            <div class="sidebar">
-                <h1>Menu</h1>
-                <a href="#">Dashboard</a>
-            </div>
-            <div class="main">
-                <div class="profile-card">
-                    <img src="https://via.placeholder.com/80" alt="Profile Picture">
-                    <h2>Welcome, <span id="userWelcome">User</span></h2>
-                    <button id="signout">Sign Out</button>
+        <!-- Main Content -->
+        <div class="main">
+            <div class="cards-container">
+                <!-- Card Makanan -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/80?text=🍔" alt="Logo Makanan">
+                    <h3>Makanan</h3>
+                    <p>3</p>
                 </div>
-                <div class="cards-container">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/50?text=🍔" alt="Makanan">
-                        <h3>Makanan</h3>
-                        <p>3</p>
-                    </div>
-                    <div class="card">
-                        <img src="https://via.placeholder.com/50?text=🍹" alt="Minuman">
-                        <h3>Minuman</h3>
-                        <p>3</p>
-                    </div>
+
+                <!-- Card Minuman -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/80?text=🍹" alt="Logo Minuman">
+                    <h3>Minuman</h3>
+                    <p>3</p>
                 </div>
-                <footer>
-                    Made with ❤️ by kiting.id
-                </footer>
             </div>
+            <footer>
+                Made with by kiting.id
+            </footer>
         </div>
     </div>
-
-    <script>
-        const validUsers = [
-            { username: 'Renaldi', password: '12345' },
-            { username: 'Karina', password: '54321' },
-        ];
-
-        const loginContainer = document.getElementById('login');
-        const dashboardContainer = document.getElementById('dashboard');
-        const userWelcome = document.getElementById('userWelcome');
-
-        document.getElementById('loginBtn').addEventListener('click', function () {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const user = validUsers.find(
-                (u) => u.username === username && u.password === password
-            );
-
-            if (user) {
-                userWelcome.textContent = user.username;
-                loginContainer.classList.remove('active');
-                dashboardContainer.classList.add('active');
-            } else {
-                alert('Username atau password salah!');
-            }
-        });
-
-        document.getElementById('signout').addEventListener('click', function () {
-            dashboardContainer.classList.remove('active');
-            loginContainer.classList.add('active');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-        });
-    </script>
 </body>
 </html>
