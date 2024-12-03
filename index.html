@@ -3,111 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Dashboard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f8ff;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
         }
 
-        .input-frm {
-            background-color: #ffffff;
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #01396c;
+            color: white;
             padding: 20px;
-            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            margin: 10px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        input {
-            width: 85%;
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            font-size: 14px;
+        .profile-card img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
         }
 
-        button {
-            width: 50%;
-            margin: 5px;
+        .profile-card h2 {
+            margin: 10px 0;
+            color: #01396c;
+        }
+
+        .profile-card button {
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
+            background-color: #01396c;
+            color: white;
             font-size: 14px;
             cursor: pointer;
-            background: #007BFF;
+        }
+
+        .profile-card button:hover {
+            background-color: #011e35;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            justify-content: space-around;
+        }
+
+        .card {
+            background-color: #01396c;
             color: white;
+            border-radius: 10px;
+            width: 45%;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        button:hover {
-            background: #0056b3;
-            transform: scale(1.05);
+        .card h3 {
+            margin-bottom: 20px;
         }
 
-        button#cancel {
-            background: #6c757d;
+        .card p {
+            font-size: 36px;
+            font-weight: bold;
         }
 
-        button#cancel:hover {
-            background: #5a6268;
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: gray;
         }
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div class="sidebar">
+        <h1>UKM</h1>
+        <a href="#">Dashboard</a>
+        <a href="#">Task</a>
+        <a href="#">Profile</a>
+    </div>
+
+    <div class="main">
+        <div class="profile-card">
+            <img src="https://via.placeholder.com/80" alt="Profile Picture">
+            <h2>Welcome, Wawan</h2>
+            <button id="signout">Sign Out</button>
+        </div>
+
+        <div class="cards-container">
+            <div class="card">
+                <h3>Makanan</h3>
+                <p>3</p>
+            </div>
+            <div class="card">
+                <h3>Minuman</h3>
+                <p>3</p>
+            </div>
+        </div>
+
+        <footer>
+            Made with ❤️ by donat.id
+        </footer>
+    </div>
 
     <script>
-        const app = {
-            mdl: {
-                user: { username: 'Renaldi', password: 'Renaldi123' },
-            },
-            vew: {
-                loginForm: function () {
-                    return `
-                        <div class="input-frm">
-                            <label for='usernm'>Username:</label>
-                            <input type="text" id="usernm" placeholder="Masukkan Username"><br>
-                            <label for='pwd'>Password:</label>
-                            <input type="password" id="pwd" placeholder="Masukkan Password"><br>
-                            <button id="signin">Login</button>
-                            <button id="signout">Cancel</button>
-                        </div>
-                    `;
-                },
-            },
-            ctr: {
-                initialize: function () {
-                    const container = document.getElementById('root');
-                    container.innerHTML = app.vew.loginForm();
-
-                    document.getElementById('signin').addEventListener('click', app.ctr.login);
-                    document.getElementById('signout').addEventListener('click', app.ctr.logout);
-                },
-
-                login: function () {
-                    const usr = document.getElementById('usernm').value.trim();
-                    const pwd = document.getElementById('pwd').value.trim();
-
-                    if (usr === app.mdl.user.username && pwd === app.mdl.user.password) {
-                        alert('Login berhasil!');
-                    } else {
-                        alert('Username atau Password salah!');
-                    }
-                },
-
-                logout: function () {
-                    document.getElementById('usernm').value = '';
-                    document.getElementById('pwd').value = '';
-                },
-            },
-        };
-
-        app.ctr.initialize(); 
+        document.getElementById('signout').addEventListener('click', function() {
+            alert('Anda telah keluar.');
+            location.reload(); // Refresh halaman
+        });
     </script>
 </body>
 </html>
