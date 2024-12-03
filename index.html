@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login dan Dashboard</title>
+    <title>Makanan dan Minuman</title>
     <style>
-        /* Tambahkan style untuk login dan dashboard */
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff8e1;
         }
 
         .sidebar {
@@ -18,7 +17,7 @@
             top: 0;
             width: 250px;
             height: 100%;
-            background-color: #01396c;
+            background-color: #ff7043;
             color: white;
             padding: 20px;
             display: flex;
@@ -48,7 +47,7 @@
         }
 
         .profile-card {
-            background-color: white;
+            background-color: #ffe0b2;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -65,21 +64,21 @@
 
         .profile-card h2 {
             margin: 10px 0;
-            color: #01396c;
+            color: #ff7043;
         }
 
         .profile-card button {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: #01396c;
+            background-color: #ff7043;
             color: white;
             font-size: 14px;
             cursor: pointer;
         }
 
         .profile-card button:hover {
-            background-color: #011e35;
+            background-color: #d84315;
         }
 
         .cards-container {
@@ -89,13 +88,19 @@
         }
 
         .card {
-            background-color: #01396c;
-            color: white;
+            background-color: #ffcc80;
+            color: #bf360c;
             border-radius: 10px;
             width: 45%;
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
         }
 
         .card h3 {
@@ -113,122 +118,43 @@
             font-size: 14px;
             color: gray;
         }
-
-        #login-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        #login-form input {
-            margin: 10px;
-            padding: 10px;
-            width: 80%;
-        }
-
-        #login-form button {
-            padding: 10px 20px;
-            background-color: #01396c;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        #login-form button:hover {
-            background-color: #011e35;
-        }
     </style>
 </head>
 <body>
-    <div id="root">
-        <!-- Konten akan diisi dinamis -->
+    <div>
+        <div class="sidebar">
+            <h1>Menu</h1>
+            <a href="#">Dashboard</a>
+        </div>
+        <div class="main">
+            <div class="profile-card">
+                <img src="https://via.placeholder.com/80" alt="Profile Picture">
+                <h2>Welcome, Renaldi</h2>
+                <button id="signout">Sign Out</button>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <img src="https://via.placeholder.com/50?text=🍔" alt="Makanan">
+                    <h3>Makanan</h3>
+                    <p>3</p>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/50?text=🍹" alt="Minuman">
+                    <h3>Minuman</h3>
+                    <p>3</p>
+                </div>
+            </div>
+            <footer>
+                Made with ❤️ by kiting.id
+            </footer>
+        </div>
     </div>
 
     <script>
-        const app = {
-            mdl: {
-                user: { username: 'Renaldi', password: 'Renaldi123' },
-            },
-            vew: {
-                loginForm: function () {
-                    return `
-                        <div id="login-form">
-                            <h2>Login</h2>
-                            <input type="text" id="username" placeholder="Username">
-                            <input type="password" id="password" placeholder="Password">
-                            <button id="login-btn">Login</button>
-                        </div>
-                    `;
-                },
-                dashboard: function (username) {
-                    return `
-                        <div>
-                            <div class="sidebar">
-                                <h1>UKM</h1>
-                                <a href="#">Dashboard</a>
-                                <a href="#">Task</a>
-                                <a href="#">Profile</a>
-                            </div>
-                            <div class="main">
-                                <div class="profile-card">
-                                    <img src="https://via.placeholder.com/80" alt="Profile Picture">
-                                    <h2>Welcome, ${username}</h2>
-                                    <button id="signout">Sign Out</button>
-                                </div>
-                                <div class="cards-container">
-                                    <div class="card">
-                                        <h3>Makanan</h3>
-                                        <p>3</p>
-                                    </div>
-                                    <div class="card">
-                                        <h3>Minuman</h3>
-                                        <p>3</p>
-                                    </div>
-                                </div>
-                                <footer>
-                                    Made with ❤️ by donat.id
-                                </footer>
-                            </div>
-                        </div>
-                    `;
-                },
-            },
-            ctr: {
-                initialize: function () {
-                    const container = document.getElementById('root');
-                    container.innerHTML = app.vew.loginForm();
-
-                    document.getElementById('login-btn').addEventListener('click', app.ctr.login);
-                },
-                login: function () {
-                    const username = document.getElementById('username').value.trim();
-                    const password = document.getElementById('password').value.trim();
-
-                    if (
-                        username === app.mdl.user.username &&
-                        password === app.mdl.user.password
-                    ) {
-                        app.ctr.loadDashboard(username);
-                    } else {
-                        alert('Username atau Password salah!');
-                    }
-                },
-                loadDashboard: function (username) {
-                    const container = document.getElementById('root');
-                    container.innerHTML = app.vew.dashboard(username);
-
-                    document.getElementById('signout').addEventListener('click', app.ctr.signOut);
-                },
-                signOut: function () {
-                    app.ctr.initialize();
-                },
-            },
-        };
-
-        app.ctr.initialize();
+        document.getElementById('signout').addEventListener('click', function () {
+            alert("You have been signed out!");
+            location.reload();
+        });
     </script>
 </body>
 </html>
