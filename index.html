@@ -64,20 +64,16 @@
     <script>
         const app = {
             mdl: {
-                users: [
-                    { username: 'Renaldi', pin: 'Renaldi123' },
-                    { username: 'Karina', pin: 'Karina123' },
-                    { username: 'Giselma', pin: 'Giselma123' },
-                ],
+                user: { username: 'Renaldi', password: 'Renaldi123' },
             },
             vew: {
                 loginForm: function () {
                     return `
                         <div class="input-frm">
                             <label for='usernm'>Username:</label>
-                            <input type="text" id="usernm"><br>
-                            <label for='pwd'>Pin:</label>
-                            <input type="password" id="pwd"><br>
+                            <input type="text" id="usernm" placeholder="Masukkan Username"><br>
+                            <label for='pwd'>Password:</label>
+                            <input type="password" id="pwd" placeholder="Masukkan Password"><br>
                             <button id="signin">Login</button>
                             <button id="signout">Cancel</button>
                         </div>
@@ -87,24 +83,20 @@
             ctr: {
                 initialize: function () {
                     const container = document.getElementById('root');
-                    container.innerHTML = app.vew.loginForm(); 
+                    container.innerHTML = app.vew.loginForm();
 
                     document.getElementById('signin').addEventListener('click', app.ctr.login);
                     document.getElementById('signout').addEventListener('click', app.ctr.logout);
                 },
 
                 login: function () {
-                    const usr = document.getElementById('usernm').value;
-                    const pwd = document.getElementById('pwd').value;
+                    const usr = document.getElementById('usernm').value.trim();
+                    const pwd = document.getElementById('pwd').value.trim();
 
-                    const user = app.mdl.users.find(
-                        (u) => u.username === usr && u.pin === pwd
-                    );
-
-                    if (user) {
+                    if (usr === app.mdl.user.username && pwd === app.mdl.user.password) {
                         alert('Login berhasil!');
                     } else {
-                        alert('Username atau Pin salah!');
+                        alert('Username atau Password salah!');
                     }
                 },
 
