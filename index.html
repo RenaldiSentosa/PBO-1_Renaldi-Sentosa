@@ -3,12 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makanan dan Minuman</title>
+    <title>Login - Makanan dan Minuman</title>
     <style>
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #fff8e1;
+        }
+
+        .login-container, .dashboard-container {
+            display: none;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .login-container.active, .dashboard-container.active {
+            display: flex;
+        }
+
+        .login-box {
+            background-color: #ffe0b2;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-box h2 {
+            color: #bf360c;
+            margin-bottom: 20px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-box button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff7043;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-box button:hover {
+            background-color: #d84315;
         }
 
         .sidebar {
@@ -35,10 +83,6 @@
             color: white;
             margin: 10px 0;
             font-size: 16px;
-        }
-
-        .sidebar a:hover {
-            text-decoration: underline;
         }
 
         .main {
@@ -88,11 +132,22 @@
     </style>
 </head>
 <body>
-    <div>
+    <!-- Login Page -->
+    <div class="login-container active" id="loginPage">
+        <div class="login-box">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div class="dashboard-container" id="dashboardPage">
         <!-- Sidebar -->
         <div class="sidebar">
             <h1>Menu</h1>
-            <a href="#">Dashboard</a>
+            <a href="#" onclick="logout()">Logout</a>
         </div>
 
         <!-- Main Content -->
@@ -113,9 +168,28 @@
                 </div>
             </div>
             <footer>
-                Made with by kiting.id
+                Made with ❤️ by kiting.id
             </footer>
         </div>
     </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === "Renaldi" && password === "06062005") {
+                document.getElementById("loginPage").classList.remove("active");
+                document.getElementById("dashboardPage").classList.add("active");
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+
+        function logout() {
+            document.getElementById("dashboardPage").classList.remove("active");
+            document.getElementById("loginPage").classList.add("active");
+        }
+    </script>
 </body>
 </html>
