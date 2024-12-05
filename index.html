@@ -114,12 +114,6 @@
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            z-index: 1; /* Ensuring card is clickable */
-        }
-
-        .card:hover {
-            transform: scale(1.05);
         }
 
         .card img {
@@ -139,7 +133,7 @@
             color: #bf360c;
         }
 
-        /* Items container */
+        /* Menu Items Styles */
         .items-container {
             display: none;
             margin-top: 20px;
@@ -168,6 +162,7 @@
             width: 50px;
             height: 50px;
         }
+
     </style>
 </head>
 <body>
@@ -189,20 +184,20 @@
         <div class="cards-container">
             <!-- Card Makanan -->
             <div class="card" id="makanan-card">
-                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Logo Makanan">
+                <img src="https://via.placeholder.com/80?text=Makanan" alt="Logo Makanan">
                 <h3>Makanan</h3>
                 <p>5</p>
             </div>
 
             <!-- Card Minuman -->
             <div class="card" id="minuman-card">
-                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Logo Minuman">
+                <img src="https://via.placeholder.com/80?text=Minuman" alt="Logo Minuman">
                 <h3>Minuman</h3>
                 <p>5</p>
             </div>
         </div>
 
-        <!-- Item Containers -->
+        <!-- Menu Makanan -->
         <div id="makanan-items" class="items-container">
             <h3>Menu Makanan</h3>
             <div class="item"><img src="https://via.placeholder.com/50?text=Makanan1" alt="Makanan 1"><span>Makanan 1</span></div>
@@ -212,6 +207,7 @@
             <div class="item"><img src="https://via.placeholder.com/50?text=Makanan5" alt="Makanan 5"><span>Makanan 5</span></div>
         </div>
 
+        <!-- Menu Minuman -->
         <div id="minuman-items" class="items-container">
             <h3>Menu Minuman</h3>
             <div class="item"><img src="https://via.placeholder.com/50?text=Minuman1" alt="Minuman 1"><span>Minuman 1</span></div>
