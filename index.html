@@ -214,27 +214,33 @@
             <div class="card">
                 <img src="https://via.placeholder.com/80" alt="Makanan">
                 <h3 class="menu-button" onclick="toggleMenu('makanan')">Makanan</h3>
-                <div id="makanan" class="menu-content">
-                    <p onclick="addToOrder('Mie Goreng')"><img src="https://via.placeholder.com/30" alt="Mie Goreng">Mie Goreng</p>
-                    <p onclick="addToOrder('Mie Rebus')"><img src="https://via.placeholder.com/30" alt="Mie Rebus">Mie Rebus</p>
-                    <p onclick="addToOrder('Bala-Bala')"><img src="https://via.placeholder.com/30" alt="Bala-Bala">Bala-Bala</p>
-                    <p onclick="addToOrder('Tahu Goreng')"><img src="https://via.placeholder.com/30" alt="Tahu Goreng">Tahu Goreng</p>
-                    <p onclick="addToOrder('Pisang Goreng')"><img src="https://via.placeholder.com/30" alt="Pisang Goreng">Pisang Goreng</p>
-                </div>
             </div>
 
             <!-- Card Minuman -->
             <div class="card">
                 <img src="https://via.placeholder.com/80" alt="Minuman">
                 <h3 class="menu-button" onclick="toggleMenu('minuman')">Minuman</h3>
-                <div id="minuman" class="menu-content">
-                    <p onclick="addToOrder('Teh Manis')"><img src="https://via.placeholder.com/30" alt="Teh Manis">Teh Manis</p>
-                    <p onclick="addToOrder('Es Jeruk')"><img src="https://via.placeholder.com/30" alt="Es Jeruk">Es Jeruk</p>
-                    <p onclick="addToOrder('Jus Mangga')"><img src="https://via.placeholder.com/30" alt="Jus Mangga">Jus Mangga</p>
-                    <p onclick="addToOrder('Kopi')"><img src="https://via.placeholder.com/30" alt="Kopi">Kopi</p>
-                    <p onclick="addToOrder('Air Mineral')"><img src="https://via.placeholder.com/30" alt="Air Mineral">Air Mineral</p>
-                </div>
             </div>
+        </div>
+
+        <!-- Menu Makanan -->
+        <div id="makanan" class="menu-content">
+            <h4>Menu Makanan</h4>
+            <p onclick="addToOrder('Mie Goreng')"><img src="https://via.placeholder.com/30" alt="Mie Goreng">Mie Goreng</p>
+            <p onclick="addToOrder('Mie Rebus')"><img src="https://via.placeholder.com/30" alt="Mie Rebus">Mie Rebus</p>
+            <p onclick="addToOrder('Bala-Bala')"><img src="https://via.placeholder.com/30" alt="Bala-Bala">Bala-Bala</p>
+            <p onclick="addToOrder('Tahu Goreng')"><img src="https://via.placeholder.com/30" alt="Tahu Goreng">Tahu Goreng</p>
+            <p onclick="addToOrder('Pisang Goreng')"><img src="https://via.placeholder.com/30" alt="Pisang Goreng">Pisang Goreng</p>
+        </div>
+
+        <!-- Menu Minuman -->
+        <div id="minuman" class="menu-content">
+            <h4>Menu Minuman</h4>
+            <p onclick="addToOrder('Teh Manis')"><img src="https://via.placeholder.com/30" alt="Teh Manis">Teh Manis</p>
+            <p onclick="addToOrder('Es Jeruk')"><img src="https://via.placeholder.com/30" alt="Es Jeruk">Es Jeruk</p>
+            <p onclick="addToOrder('Jus Mangga')"><img src="https://via.placeholder.com/30" alt="Jus Mangga">Jus Mangga</p>
+            <p onclick="addToOrder('Kopi')"><img src="https://via.placeholder.com/30" alt="Kopi">Kopi</p>
+            <p onclick="addToOrder('Air Mineral')"><img src="https://via.placeholder.com/30" alt="Air Mineral">Air Mineral</p>
         </div>
 
         <!-- Order Summary -->
@@ -258,7 +264,6 @@
             const password = document.getElementById('password').value;
 
             const user = users.find(u => u.username === username && u.password === password);
-
             if (user) {
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
