@@ -13,7 +13,15 @@
         }
 
         .hidden {
-            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
         /* Login Form Styles */
@@ -135,7 +143,7 @@
 </head>
 <body>
     <!-- Login Form -->
-    <div id="login-container" class="login-container">
+    <div id="login-container" class="login-container visible">
         <div>
             <h1>Login</h1>
             <input type="text" id="username" placeholder="Username">
@@ -180,9 +188,11 @@
 
             // Validasi username dan password
             if (username === "user" && password === "password") {
-                // Hide login and show dashboard
+                // Hide login form and show dashboard with transition
+                document.getElementById('login-container').classList.remove('visible');
                 document.getElementById('login-container').classList.add('hidden');
                 document.getElementById('dashboard-container').classList.remove('hidden');
+                document.getElementById('dashboard-container').classList.add('visible');
             } else {
                 alert("Username atau password salah!");
             }
