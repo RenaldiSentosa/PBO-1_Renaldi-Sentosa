@@ -149,6 +149,35 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+
+        /* Order Section Styles */
+        .order-summary {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffe0b2;
+            border-radius: 10px;
+        }
+
+        .order-summary h4 {
+            color: #bf360c;
+        }
+
+        .order-summary ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .order-summary ul li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            color: #bf360c;
+        }
+
+        .order-summary ul li span {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -172,11 +201,11 @@
             <div class="card">
                 <h3 class="menu-button" onclick="toggleMenu('makanan')">Makanan</h3>
                 <div id="makanan" class="menu-content">
-                    <p>Mie Goreng</p>
-                    <p>Mie Rebus</p>
-                    <p>Bala-Bala</p>
-                    <p>Tahu Goreng</p>
-                    <p>Pisang Goreng</p>
+                    <p onclick="addToOrder('Mie Goreng')">Mie Goreng</p>
+                    <p onclick="addToOrder('Mie Rebus')">Mie Rebus</p>
+                    <p onclick="addToOrder('Bala-Bala')">Bala-Bala</p>
+                    <p onclick="addToOrder('Tahu Goreng')">Tahu Goreng</p>
+                    <p onclick="addToOrder('Pisang Goreng')">Pisang Goreng</p>
                 </div>
             </div>
 
@@ -184,19 +213,29 @@
             <div class="card">
                 <h3 class="menu-button" onclick="toggleMenu('minuman')">Minuman</h3>
                 <div id="minuman" class="menu-content">
-                    <p>Teh Manis</p>
-                    <p>Es Jeruk</p>
-                    <p>Jus Mangga</p>
-                    <p>Kopi</p>
-                    <p>Air Mineral</p>
+                    <p onclick="addToOrder('Teh Manis')">Teh Manis</p>
+                    <p onclick="addToOrder('Es Jeruk')">Es Jeruk</p>
+                    <p onclick="addToOrder('Jus Mangga')">Jus Mangga</p>
+                    <p onclick="addToOrder('Kopi')">Kopi</p>
+                    <p onclick="addToOrder('Air Mineral')">Air Mineral</p>
                 </div>
             </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h4>Pesanan Anda</h4>
+            <ul id="order-list">
+                <!-- List pesanan akan tampil di sini -->
+            </ul>
+            <p><strong>Total Makanan & Minuman yang Dipesan: </strong><span id="total-order">0</span></p>
         </div>
     </div>
 
     <script>
         // User data
         const users = [{ username: 'Renaldi', password: 'Renaldi123' }];
+        let orders = [];
 
         // Login button event
         document.getElementById('login-btn').addEventListener('click', function () {
@@ -224,6 +263,29 @@
         function toggleMenu(menuId) {
             const menu = document.getElementById(menuId);
             menu.classList.toggle('active');
+        }
+
+        // Add to Order List
+        function addToOrder(item) {
+            // Add item to orders array
+            orders.push(item);
+            updateOrderSummary();
+        }
+
+        // Update Order Summary
+        function updateOrderSummary() {
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = ''; // Clear current list
+
+            // Create list items for each order
+            orders.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                orderList.appendChild(li);
+            });
+
+            // Update total order count
+            document.getElementById('total-order').textContent = orders.length;
         }
     </script>
 </body>
