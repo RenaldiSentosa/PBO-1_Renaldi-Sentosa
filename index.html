@@ -140,7 +140,7 @@
         }
 
         .menu-content.active {
-            max-height: 1000px;
+            max-height: 500px; /* Set a reasonable max height */
         }
 
         .menu-button {
@@ -262,6 +262,7 @@
         // Toggle menu visibility
         function toggleMenu(menuId) {
             const menu = document.getElementById(menuId);
+            // Toggle the 'active' class which controls the visibility
             menu.classList.toggle('active');
         }
 
