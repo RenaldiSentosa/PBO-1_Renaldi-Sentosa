@@ -243,10 +243,15 @@
             updateOrderList();
         });
 
-        // Show Menu (Makanan/Minuman)
-        function showMenu(menu) {
-            document.getElementById('menu-makanan').style.display = menu === 'makanan' ? 'block' : 'none';
-            document.getElementById('menu-minuman').style.display = menu === 'minuman' ? 'block' : 'none';
+        // Show Menu (Makanan / Minuman)
+        function showMenu(menuType) {
+            document.getElementById('menu-makanan').style.display = 'none';
+            document.getElementById('menu-minuman').style.display = 'none';
+            if (menuType === 'makanan') {
+                document.getElementById('menu-makanan').style.display = 'block';
+            } else if (menuType === 'minuman') {
+                document.getElementById('menu-minuman').style.display = 'block';
+            }
         }
 
         // Add Item to Order
