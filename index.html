@@ -3,60 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Makanan dan Minuman</title>
+    <title>Makanan dan Minuman</title>
     <style>
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #fff8e1;
+            overflow: hidden;
         }
 
-        .login-container, .dashboard-container {
-            display: none;
-            height: 100vh;
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
             display: flex;
-            justify-content: center;
             align-items: center;
-            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
         }
 
-        .login-container.active, .dashboard-container.active {
-            display: flex;
+        .hidden {
+            transform: translateX(-100%);
+            opacity: 0;
+            pointer-events: none;
         }
 
-        .login-box {
+        .login {
             background-color: #ffe0b2;
-            padding: 30px;
+            padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-        .login-box h2 {
-            color: #bf360c;
+        .login h2 {
             margin-bottom: 20px;
+            color: #bf360c;
         }
 
-        .login-box input {
-            width: 100%;
-            padding: 10px;
+        .login input {
             margin: 10px 0;
-            border: 1px solid #ccc;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #bf360c;
             border-radius: 5px;
         }
 
-        .login-box button {
+        .login button {
             padding: 10px 20px;
             border: none;
+            border-radius: 5px;
             background-color: #ff7043;
             color: white;
-            border-radius: 5px;
+            font-size: 14px;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        .login-box button:hover {
-            background-color: #d84315;
+        .dashboard {
+            text-align: center;
+            width: 100%;
+            height: 100%;
         }
 
         .sidebar {
@@ -85,7 +93,11 @@
             font-size: 16px;
         }
 
-        .main {
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .dashboard-content {
             margin-left: 250px;
             padding: 20px;
         }
@@ -93,38 +105,31 @@
         .cards-container {
             display: flex;
             gap: 20px;
-            justify-content: space-around;
-            margin-top: 50px;
+            justify-content: center;
         }
 
         .card {
-            background-color: #ffe0b2;
+            background-color: #ffcc80;
+            color: #bf360c;
             border-radius: 10px;
-            width: 45%;
+            width: 200px;
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .card img {
-            width: 80px;
-            height: 80px;
+            width: 50px;
+            height: 50px;
             margin-bottom: 10px;
         }
 
         .card h3 {
             margin-bottom: 10px;
-            color: #bf360c;
-        }
-
-        .card p {
-            font-size: 36px;
-            font-weight: bold;
-            color: #bf360c;
         }
 
         footer {
-            margin-top: 50px;
+            margin-top: 20px;
             text-align: center;
             font-size: 14px;
             color: gray;
@@ -132,37 +137,28 @@
     </style>
 </head>
 <body>
-    <!-- Login Page -->
-    <div class="login-container active" id="loginPage">
-        <div class="login-box">
+    <div id="login-container" class="container">
+        <div class="login">
             <h2>Login</h2>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="login()">Login</button>
+            <input id="username" type="text" placeholder="Username"><br>
+            <input id="password" type="password" placeholder="Password"><br>
+            <button id="login-button">Login</button>
         </div>
     </div>
-
-    <!-- Dashboard Page -->
-    <div class="dashboard-container" id="dashboardPage">
-        <!-- Sidebar -->
+    <div id="dashboard-container" class="container hidden">
         <div class="sidebar">
             <h1>Menu</h1>
-            <a href="#" onclick="logout()">Logout</a>
+            <a href="#">Dashboard</a>
         </div>
-
-        <!-- Main Content -->
-        <div class="main">
+        <div class="dashboard-content">
             <div class="cards-container">
-                <!-- Card Makanan -->
                 <div class="card">
-                    <img src="https://via.placeholder.com/80?text=🍔" alt="Logo Makanan">
+                    <img src="https://via.placeholder.com/50?text=🍔" alt="Makanan">
                     <h3>Makanan</h3>
                     <p>3</p>
                 </div>
-
-                <!-- Card Minuman -->
                 <div class="card">
-                    <img src="https://via.placeholder.com/80?text=🍹" alt="Logo Minuman">
+                    <img src="https://via.placeholder.com/50?text=🍹" alt="Minuman">
                     <h3>Minuman</h3>
                     <p>3</p>
                 </div>
@@ -174,22 +170,21 @@
     </div>
 
     <script>
-        function login() {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+        const loginContainer = document.getElementById('login-container');
+        const dashboardContainer = document.getElementById('dashboard-container');
+        const loginButton = document.getElementById('login-button');
 
-            if (username === "Renaldi" && password === "06062005") {
-                document.getElementById("loginPage").classList.remove("active");
-                document.getElementById("dashboardPage").classList.add("active");
+        loginButton.addEventListener('click', function () {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === "user" && password === "password") {
+                loginContainer.classList.add('hidden');
+                dashboardContainer.classList.remove('hidden');
             } else {
-                alert("Invalid username or password!");
+                alert("Invalid username or password.");
             }
-        }
-
-        function logout() {
-            document.getElementById("dashboardPage").classList.remove("active");
-            document.getElementById("loginPage").classList.add("active");
-        }
+        });
     </script>
 </body>
 </html>
