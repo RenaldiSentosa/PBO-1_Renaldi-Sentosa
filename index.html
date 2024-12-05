@@ -249,10 +249,12 @@
         <!-- Menu Minuman -->
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
+            <p onclick="addToOrder('Air Mineral', 3000)">
+                <img src="https://i.pinimg.com/736x/37/a4/29/37a429fffb130d8317c10523e85c6a3b.jpg" alt="Air Mineral">Air Mineral - Rp 3,000</p>
             <p onclick="addToOrder('Teh Manis', 5000)">
                 <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
-            <p onclick="addToOrder('Es Jeruk', 6000)">
-                <img src="https://i.pinimg.com/736x/0e/0d/89/0e0d89bc3d0d79e9c16922e5c6db0de8.jpg" alt="Es Jeruk">Es Jeruk - Rp 6,000</p>
+            <p onclick="addToOrder('Jus Mangga', 6000)">
+                <img src="https://i.pinimg.com/736x/0e/0d/89/0e0d89bc3d0d79e9c16922e5c6db0de8.jpg" alt="Jus Mangga">Jus Mangga - Rp 6,000</p>
             <p onclick="addToOrder('Es Teh', 5000)">
                 <img src="https://i.pinimg.com/736x/da/e3/04/dae30479f5f6b0a428f75a0b0b154e34.jpg" alt="Es Teh">Es Teh - Rp 5,000</p>
             <p onclick="addToOrder('Kopi', 7000)">
@@ -261,90 +263,67 @@
 
         <!-- Order Summary -->
         <div class="order-summary">
-            <h4>Order Summary</h4>
+            <h4>Pesanan Anda</h4>
             <ul id="order-list">
-                <!-- List of ordered items will appear here -->
+                <!-- Daftar pesanan akan muncul di sini -->
             </ul>
-            <button id="place-order-btn">Place Order</button>
+            <button id="checkout-btn">Checkout</button>
         </div>
     </div>
 
     <script>
-        const users = [
-            { username: 'admin', password: 'admin' },
-            { username: 'kiting', password: 'kiting' }
-        ];
+        // Variable untuk login dan dashboard
+        let isLoggedIn = false;
+        let username = '';
+        let orders = [];
 
-        let currentUser = null;
-        let order = [];
-
-        // Login function
-        document.getElementById("login-btn").addEventListener("click", function() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-
-            const user = users.find(user => user.username === username && user.password === password);
-
-            if (user) {
-                currentUser = username;
-                document.getElementById("user-name").textContent = username;
-                document.getElementById("login-form").style.display = "none";
-                document.getElementById("dashboard").style.display = "block";
+        // Fungsi login
+        document.getElementById('login-btn').addEventListener('click', function () {
+            username = document.getElementById('username').value;
+            if (username) {
+                isLoggedIn = true;
+                document.getElementById('user-name').textContent = username;
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
             } else {
-                alert("Username atau Password salah.");
+                alert('Username harus diisi!');
             }
         });
 
-        // Logout function
-        document.getElementById("logout-btn").addEventListener("click", function() {
-            currentUser = null;
-            document.getElementById("login-form").style.display = "block";
-            document.getElementById("dashboard").style.display = "none";
+        // Fungsi logout
+        document.getElementById('logout-btn').addEventListener('click', function () {
+            isLoggedIn = false;
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
         });
 
-        // Show menu based on selection
+        // Fungsi untuk menampilkan menu
         function showMenu(menu) {
-            document.getElementById('menu-makanan').style.display = 'none';
-            document.getElementById('menu-minuman').style.display = 'none';
-
-            if (menu === 'makanan') {
-                document.getElementById('menu-makanan').style.display = 'block';
-            } else if (menu === 'minuman') {
-                document.getElementById('menu-minuman').style.display = 'block';
-            }
+            document.getElementById('menu-makanan').style.display = menu === 'makanan' ? 'block' : 'none';
+            document.getElementById('menu-minuman').style.display = menu === 'minuman' ? 'block' : 'none';
         }
 
-        // Add item to order
-        function addToOrder(itemName, price) {
-            order.push({ itemName, price });
+        // Fungsi untuk menambah pesanan
+        function addToOrder(name, price) {
+            orders.push({ name: name, price: price });
             updateOrderList();
         }
 
-        // Update order list
+        // Fungsi untuk memperbarui daftar pesanan
         function updateOrderList() {
-            const orderList = document.getElementById("order-list");
-            orderList.innerHTML = "";
-            order.forEach(item => {
-                const li = document.createElement("li");
-                li.innerHTML = `${item.itemName} - Rp ${item.price}`;
-                orderList.appendChild(li);
-            });
-        }
-
-        // Place order
-        document.getElementById("place-order-btn").addEventListener("click", function() {
-            if (order.length === 0) {
-                alert("Tidak ada pesanan.");
-                return;
-            }
-
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = '';
             let total = 0;
-            order.forEach(item => total += item.price);
-
-            alert(`Total Pesanan: Rp ${total}`);
-            order = []; // Reset order after placing it
-            updateOrderList(); // Clear order list
-        });
+            orders.forEach(order => {
+                const li = document.createElement('li');
+                li.innerHTML = `${order.name} - Rp ${order.price}`;
+                orderList.appendChild(li);
+                total += order.price;
+            });
+            const totalLi = document.createElement('li');
+            totalLi.innerHTML = `<strong>Total: Rp ${total}</strong>`;
+            orderList.appendChild(totalLi);
+        }
     </script>
 </body>
 </html>
