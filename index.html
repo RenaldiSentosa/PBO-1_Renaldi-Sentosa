@@ -119,10 +119,18 @@
             border: 1px solid #e0e0e0;
             border-radius: 5px;
             padding: 20px;
-            width: 120px;
+            width: 150px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
         }
 
         .card:hover {
@@ -148,8 +156,8 @@
         }
 
         .menu-content p img {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             margin-right: 10px;
         }
 
@@ -218,133 +226,43 @@
         </div>
 
         <div class="cards-container">
-            <!-- Card Makanan -->
-            <div class="card">
-                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Makanan" width="100" height="100">
-                <h3 class="menu-button" onclick="showMenu('makanan')">Makanan</h3>
+            <div class="card" onclick="showMenu('makanan')">
+                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Makanan">
+                <h3>Makanan</h3>
             </div>
-
-            <!-- Card Minuman -->
-            <div class="card">
-                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Minuman" width="100" height="100">
-                <h3 class="menu-button" onclick="showMenu('minuman')">Minuman</h3>
+            <div class="card" onclick="showMenu('minuman')">
+                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Minuman">
+                <h3>Minuman</h3>
             </div>
         </div>
 
-        <!-- Menu Makanan -->
         <div id="menu-makanan" class="menu-container">
             <h4>Menu Makanan</h4>
             <p onclick="addToOrder('Mie Goreng', 15000)">
                 <img src="https://i.pinimg.com/736x/dd/88/65/dd8865338cba785b7e4fc5b0ef511321.jpg" alt="Mie Goreng">Mie Goreng - Rp 15,000</p>
             <p onclick="addToOrder('Mie Rebus', 14000)">
                 <img src="https://i.pinimg.com/736x/87/b7/25/87b7253554790eb1ee3ff3b9f4b3e2a2.jpg" alt="Mie Rebus">Mie Rebus - Rp 14,000</p>
-            <p onclick="addToOrder('Bala-Bala', 5000)">
-                <img src="https://i.pinimg.com/736x/ea/61/a1/ea61a12fa3c21cdc8ebe6a237f489744.jpg" alt="Bala-Bala">Bala-Bala - Rp 5,000</p>
-            <p onclick="addToOrder('Tahu Goreng', 7000)">
-                <img src="https://i.pinimg.com/736x/b5/2d/73/b52d738a062ceb6e0f0c68ba67ec9a3a.jpg" alt="Tahu Goreng">Tahu Goreng - Rp 7,000</p>
-            <p onclick="addToOrder('Pisang Goreng', 8000)">
-                <img src="https://i.pinimg.com/736x/fd/03/fc/fd03fc752571f9090ccf915ddec9dd49.jpg" alt="Pisang Goreng">Pisang Goreng - Rp 8,000</p>
         </div>
 
-        <!-- Menu Minuman -->
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
-            <p onclick="addToOrder('Teh Manis', 5000)">
-                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
             <p onclick="addToOrder('Es Jeruk', 6000)">
                 <img src="https://i.pinimg.com/736x/0e/0d/89/0e0d89bc3d0d79e9c16922e5c6db0de8.jpg" alt="Es Jeruk">Es Jeruk - Rp 6,000</p>
-            <p onclick="addToOrder('Es Teh', 5000)">
-                <img src="https://i.pinimg.com/736x/da/e3/04/dae30479f5f6b0a428f75a0b0b154e34.jpg" alt="Es Teh">Es Teh - Rp 5,000</p>
-            <p onclick="addToOrder('Kopi', 7000)">
-                <img src="https://i.pinimg.com/736x/a4/63/9b/a4639b4dffeb50a2c2c2f923ecaeceab.jpg" alt="Kopi">Kopi - Rp 7,000</p>
         </div>
 
-        <!-- Order Summary -->
         <div class="order-summary">
             <h4>Order Summary</h4>
-            <ul id="order-list">
-                <!-- List of ordered items will appear here -->
-            </ul>
+            <ul id="order-list"></ul>
             <button id="place-order-btn">Place Order</button>
         </div>
     </div>
 
     <script>
-        const users = [
-            { username: 'admin', password: 'admin' },
-            { username: 'kiting', password: 'kiting' }
-        ];
-
+        const users = [{ username: 'admin', password: 'admin' }];
         let currentUser = null;
         let order = [];
 
-        // Login function
-        document.getElementById("login-btn").addEventListener("click", function() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-
-            const user = users.find(user => user.username === username && user.password === password);
-
-            if (user) {
-                currentUser = username;
-                document.getElementById("user-name").textContent = username;
-                document.getElementById("login-form").style.display = "none";
-                document.getElementById("dashboard").style.display = "block";
-            } else {
-                alert("Username atau Password salah.");
-            }
-        });
-
-        // Logout function
-        document.getElementById("logout-btn").addEventListener("click", function() {
-            currentUser = null;
-            document.getElementById("login-form").style.display = "block";
-            document.getElementById("dashboard").style.display = "none";
-        });
-
-        // Show menu based on selection
-        function showMenu(menu) {
-            document.getElementById('menu-makanan').style.display = 'none';
-            document.getElementById('menu-minuman').style.display = 'none';
-
-            if (menu === 'makanan') {
-                document.getElementById('menu-makanan').style.display = 'block';
-            } else if (menu === 'minuman') {
-                document.getElementById('menu-minuman').style.display = 'block';
-            }
-        }
-
-        // Add item to order
-        function addToOrder(itemName, price) {
-            order.push({ itemName, price });
-            updateOrderList();
-        }
-
-        // Update order list
-        function updateOrderList() {
-            const orderList = document.getElementById("order-list");
-            orderList.innerHTML = "";
-            order.forEach(item => {
-                const li = document.createElement("li");
-                li.innerHTML = `${item.itemName} - Rp ${item.price}`;
-                orderList.appendChild(li);
-            });
-        }
-
-        // Place order
-        document.getElementById("place-order-btn").addEventListener("click", function() {
-            if (order.length === 0) {
-                alert("Tidak ada pesanan.");
-                return;
-            }
-
-            let total = 0;
-            order.forEach(item => total += item.price);
-
-            alert(`Total Pesanan: Rp ${total}`);
-            order = []; // Reset order after placing it
-            updateOrderList(); // Clear order list
-        });
+        document.getElementById("login-btn").addEventListener("click", () => {});
     </script>
 </body>
-</html> 
+</html>
