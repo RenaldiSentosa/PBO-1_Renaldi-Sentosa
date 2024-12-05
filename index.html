@@ -178,10 +178,23 @@
             border-radius: 5px;
             color: #bf360c;
             font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .order-summary ul li span {
-            font-weight: bold;
+        .order-summary ul li button {
+            background-color: #e64a19;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .order-summary ul li button:hover {
+            background-color: #bf360c;
         }
 
         .order-summary button {
@@ -247,7 +260,7 @@
                 <img src="https://i.pinimg.com/736x/b5/2d/73/b52d738a062ceb6e0f0c68ba67ec9a3a.jpg" alt="Tahu Goreng" width="100" height="100">Tahu Goreng - Rp 7,000
             </p>
             <p onclick="addToOrder('Pisang Goreng', 8000)">
-                <img src="https://i.pinimg.com/736x/fd/03/fc/fd03fc752571f9090ccf915ddec9dd49.jpg" alt="Pisang Goreng" width="100" height="100">Pisang Goreng - Rp 8,000
+                <img src="https://i.pinimg.com/736x/d7/66/2d/d7662d26492ab0199a351e5d36072a87.jpg" alt="Pisang Goreng" width="100" height="100">Pisang Goreng - Rp 8,000
             </p>
         </div>
 
@@ -255,7 +268,7 @@
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
             <p onclick="addToOrder('Teh Manis', 5000)">
-                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis" width="100" height="100">Teh Manis - Rp 5,000
+                <img src="https://i.pinimg.com/736x/75/c3/1e/75c31e93db15ab2e6e2ad68f075df3cc.jpg" alt="Teh Manis" width="100" height="100">Teh Manis - Rp 5,000
             </p>
             <p onclick="addToOrder('Jus Jeruk', 8000)">
                 <img src="https://i.pinimg.com/736x/9d/c9/c2/9dc9c24cc2f9a6d772ea031a60033b50.jpg" alt="Jus Jeruk" width="100" height="100">Jus Jeruk - Rp 8,000
@@ -316,14 +329,24 @@
             updateOrderSummary();
         }
 
+        // Remove item from order
+        function removeFromOrder(index) {
+            order.splice(index, 1);
+            updateOrderSummary();
+        }
+
         // Update Order Summary
         function updateOrderSummary() {
             const orderList = document.getElementById('order-summary-list');
             orderList.innerHTML = '';
             let total = 0;
-            order.forEach(orderItem => {
+            order.forEach((orderItem, index) => {
                 const li = document.createElement('li');
                 li.textContent = `${orderItem.item} - Rp ${orderItem.price}`;
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Hapus';
+                deleteButton.onclick = () => removeFromOrder(index);
+                li.appendChild(deleteButton);
                 orderList.appendChild(li);
                 total += orderItem.price;
             });
