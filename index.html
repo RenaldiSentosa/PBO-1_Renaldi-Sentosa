@@ -139,24 +139,18 @@
             font-size: 22px;
         }
 
-        .menu-container p {
+        .menu-content p {
+            cursor: pointer;
+            padding: 8px 0;
             display: flex;
             align-items: center;
-            padding: 8px 0;
             font-size: 16px;
-            border-bottom: 1px solid #e0e0e0;
         }
 
-        .menu-container p:last-child {
-            border-bottom: none;
-        }
-
-        .menu-container p img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
+        .menu-content p img {
+            width: 30px;
+            height: 30px;
             margin-right: 10px;
-            border-radius: 5px;
         }
 
         /* Order Section Styles */
@@ -203,17 +197,6 @@
 
         .order-summary button:hover {
             background-color: #e64a19;
-        }
-
-        .remove-item {
-            cursor: pointer;
-            color: red;
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        .remove-item:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -267,87 +250,101 @@
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
             <p onclick="addToOrder('Teh Manis', 5000)">
-                <img src="https://i.pinimg.com/736x/c5/a4/0d/c5a40d8ccf8a1d229a6f06d6db346a0d.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
-            <p onclick="addToOrder('Es Jeruk', 7000)">
-                <img src="https://i.pinimg.com/736x/31/fb/98/31fb980d1811ef5fa9259274a82d8887.jpg" alt="Es Jeruk">Es Jeruk - Rp 7,000</p>
-            <p onclick="addToOrder('Es Teh', 6000)">
-                <img src="https://i.pinimg.com/736x/24/30/4e/24304ef7de9f99de56d1e4563f1fcfc6.jpg" alt="Es Teh">Es Teh - Rp 6,000</p>
+                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
+            <p onclick="addToOrder('Es Jeruk', 6000)">
+                <img src="https://i.pinimg.com/736x/0e/0d/89/0e0d89bc3d0d79e9c16922e5c6db0de8.jpg" alt="Es Jeruk">Es Jeruk - Rp 6,000</p>
+            <p onclick="addToOrder('Es Teh', 5000)">
+                <img src="https://i.pinimg.com/736x/da/e3/04/dae30479f5f6b0a428f75a0b0b154e34.jpg" alt="Es Teh">Es Teh - Rp 5,000</p>
+            <p onclick="addToOrder('Kopi', 7000)">
+                <img src="https://i.pinimg.com/736x/a4/63/9b/a4639b4dffeb50a2c2c2f923ecaeceab.jpg" alt="Kopi">Kopi - Rp 7,000</p>
         </div>
 
         <!-- Order Summary -->
         <div class="order-summary">
             <h4>Order Summary</h4>
             <ul id="order-list">
-                <!-- Order items will appear here -->
+                <!-- List of ordered items will appear here -->
             </ul>
-            <button onclick="placeOrder()">Place Order</button>
+            <button id="place-order-btn">Place Order</button>
         </div>
     </div>
 
     <script>
+        const users = [
+            { username: 'admin', password: 'admin123' },
+            { username: 'kasir', password: 'kasir123' }
+        ];
+
         let currentUser = null;
         let order = [];
 
-        // Simulate login
+        // Login function
         document.getElementById("login-btn").addEventListener("click", function() {
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
 
-            if (username && password) {
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
                 currentUser = username;
                 document.getElementById("user-name").textContent = username;
                 document.getElementById("login-form").style.display = "none";
                 document.getElementById("dashboard").style.display = "block";
+            } else {
+                alert("Username atau Password salah.");
             }
         });
 
-        // Logout functionality
+        // Logout function
         document.getElementById("logout-btn").addEventListener("click", function() {
             currentUser = null;
-            document.getElementById("user-name").textContent = '';
             document.getElementById("login-form").style.display = "block";
             document.getElementById("dashboard").style.display = "none";
         });
 
-        // Show menu based on category
-        function showMenu(category) {
-            document.getElementById("menu-makanan").style.display = (category === "makanan") ? "block" : "none";
-            document.getElementById("menu-minuman").style.display = (category === "minuman") ? "block" : "none";
+        // Show menu based on selection
+        function showMenu(menu) {
+            document.getElementById('menu-makanan').style.display = 'none';
+            document.getElementById('menu-minuman').style.display = 'none';
+
+            if (menu === 'makanan') {
+                document.getElementById('menu-makanan').style.display = 'block';
+            } else if (menu === 'minuman') {
+                document.getElementById('menu-minuman').style.display = 'block';
+            }
         }
 
-        // Add item to order list
-        function addToOrder(item, price) {
-            order.push({ item, price });
+        // Add item to order
+        function addToOrder(itemName, price) {
+            order.push({ itemName, price });
             updateOrderList();
         }
 
-        // Remove item from order list
-        function removeFromOrder(index) {
-            order.splice(index, 1);
-            updateOrderList();
-        }
-
-        // Update the order list
+        // Update order list
         function updateOrderList() {
             const orderList = document.getElementById("order-list");
-            orderList.innerHTML = '';
-            order.forEach(function(orderItem, index) {
+            orderList.innerHTML = "";
+            order.forEach(item => {
                 const li = document.createElement("li");
-                li.innerHTML = `${orderItem.item} - Rp ${orderItem.price} <span class="remove-item" onclick="removeFromOrder(${index})">Remove</span>`;
+                li.innerHTML = `${item.itemName} - Rp ${item.price}`;
                 orderList.appendChild(li);
             });
         }
 
-        // Place the order
-        function placeOrder() {
-            if (order.length > 0) {
-                alert("Order placed successfully!");
-                order = [];
-                updateOrderList();
-            } else {
-                alert("Please select at least one item to order.");
+        // Place order
+        document.getElementById("place-order-btn").addEventListener("click", function() {
+            if (order.length === 0) {
+                alert("Tidak ada pesanan.");
+                return;
             }
-        }
+
+            let total = 0;
+            order.forEach(item => total += item.price);
+
+            alert(`Total Pesanan: Rp ${total}`);
+            order = []; // Reset order after placing it
+            updateOrderList(); // Clear order list
+        });
     </script>
 </body>
 </html>
