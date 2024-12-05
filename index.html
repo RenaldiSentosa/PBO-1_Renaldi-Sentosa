@@ -5,7 +5,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Warung Kiting</title>
     <style>
-        /* Styles tetap sama seperti sebelumnya */
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff8e1;
+        }
+
+        /* Login Form Styles */
+        #login-form {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        #login-form h2 {
+            margin-bottom: 20px;
+            color: #ff7043;
+        }
+
+        #login-form input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #login-form button {
+            width: 95%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff7043;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #login-form button:hover {
+            background-color: #e64a19;
+        }
+
+        /* Dashboard Styles */
+        .main-content {
+            display: none;
+            margin: 0;
+            padding: 20px;
+            width: 100%;
+            height: 100vh;
+            background-color: #fff8e1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff7043;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .welcome {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #ffe0b2;
+            color: #ff7043;
+        }
+
+        .welcome h2 {
+            margin: 0;
+        }
+
+        .welcome button {
+            background: #e64a19;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 8px 16px;
+            border: none;
+        }
+
+        .welcome button:hover {
+            background: #bf360c;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #ffe0b2;
+            border-radius: 10px;
+            width: 45%;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #bf360c;
+        }
+
+        .card p {
+            font-size: 36px;
+            font-weight: bold;
+            color: #bf360c;
+        }
+
+        /* Menu Styles */
+        .menu-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .menu-container h4 {
+            color: #bf360c;
+            font-size: 22px;
+        }
+
+        .menu-content p {
+            cursor: pointer;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-content p img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        /* Order Section Styles */
+        .order-summary {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffe0b2;
+            border-radius: 10px;
+        }
+
+        .order-summary h4 {
+            color: #bf360c;
+        }
+
+        .order-summary ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .order-summary ul li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            color: #bf360c;
+        }
+
+        .order-summary ul li span {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -42,21 +220,21 @@
         <!-- Menu Makanan -->
         <div id="menu-makanan" class="menu-container">
             <h4>Menu Makanan</h4>
-            <p onclick="addToOrder('Mie Goreng')"><img src="https://via.placeholder.com/30" alt="Mie Goreng">Mie Goreng - Rp 15.000</p>
-            <p onclick="addToOrder('Mie Rebus')"><img src="https://via.placeholder.com/30" alt="Mie Rebus">Mie Rebus - Rp 15.000</p>
-            <p onclick="addToOrder('Bala-Bala')"><img src="https://via.placeholder.com/30" alt="Bala-Bala">Bala-Bala - Rp 5.000</p>
-            <p onclick="addToOrder('Tahu Goreng')"><img src="https://via.placeholder.com/30" alt="Tahu Goreng">Tahu Goreng - Rp 5.000</p>
-            <p onclick="addToOrder('Pisang Goreng')"><img src="https://via.placeholder.com/30" alt="Pisang Goreng">Pisang Goreng - Rp 10.000</p>
+            <p onclick="addToOrder('Mie Goreng')"><img src="https://via.placeholder.com/30" alt="Mie Goreng">Mie Goreng</p>
+            <p onclick="addToOrder('Mie Rebus')"><img src="https://via.placeholder.com/30" alt="Mie Rebus">Mie Rebus</p>
+            <p onclick="addToOrder('Bala-Bala')"><img src="https://via.placeholder.com/30" alt="Bala-Bala">Bala-Bala</p>
+            <p onclick="addToOrder('Tahu Goreng')"><img src="https://via.placeholder.com/30" alt="Tahu Goreng">Tahu Goreng</p>
+            <p onclick="addToOrder('Pisang Goreng')"><img src="https://via.placeholder.com/30" alt="Pisang Goreng">Pisang Goreng</p>
         </div>
 
         <!-- Menu Minuman -->
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
-            <p onclick="addToOrder('Teh Manis')"><img src="https://via.placeholder.com/30" alt="Teh Manis">Teh Manis - Rp 5.000</p>
-            <p onclick="addToOrder('Es Jeruk')"><img src="https://via.placeholder.com/30" alt="Es Jeruk">Es Jeruk - Rp 10.000</p>
-            <p onclick="addToOrder('Jus Mangga')"><img src="https://via.placeholder.com/30" alt="Jus Mangga">Jus Mangga - Rp 20.000</p>
-            <p onclick="addToOrder('Kopi')"><img src="https://via.placeholder.com/30" alt="Kopi">Kopi - Rp 15.000</p>
-            <p onclick="addToOrder('Air Mineral')"><img src="https://via.placeholder.com/30" alt="Air Mineral">Air Mineral - Rp 5.000</p>
+            <p onclick="addToOrder('Teh Manis')"><img src="https://via.placeholder.com/30" alt="Teh Manis">Teh Manis</p>
+            <p onclick="addToOrder('Es Jeruk')"><img src="https://via.placeholder.com/30" alt="Es Jeruk">Es Jeruk</p>
+            <p onclick="addToOrder('Jus Mangga')"><img src="https://via.placeholder.com/30" alt="Jus Mangga">Jus Mangga</p>
+            <p onclick="addToOrder('Kopi')"><img src="https://via.placeholder.com/30" alt="Kopi">Kopi</p>
+            <p onclick="addToOrder('Air Mineral')"><img src="https://via.placeholder.com/30" alt="Air Mineral">Air Mineral</p>
         </div>
 
         <!-- Order Summary -->
@@ -65,8 +243,7 @@
             <ul id="order-list">
                 <!-- List pesanan akan tampil di sini -->
             </ul>
-            <p><strong>Total Item Dipesan: </strong><span id="total-order">0</span></p>
-            <p><strong>Total Harga: </strong>Rp <span id="total-price">0</span></p>
+            <p><strong>Total Makanan & Minuman yang Dipesan: </strong><span id="total-order">0</span></p>
         </div>
     </div>
 
@@ -74,21 +251,6 @@
         // User data
         const users = [{ username: 'Renaldi', password: 'Renaldi123' }];
         let orders = [];
-        let totalPrice = 0;
-
-        // Daftar menu dan harga
-        const menuPrices = {
-            'Mie Goreng': 15000,
-            'Mie Rebus': 15000,
-            'Bala-Bala': 5000,
-            'Tahu Goreng': 5000,
-            'Pisang Goreng': 10000,
-            'Teh Manis': 5000,
-            'Es Jeruk': 10000,
-            'Jus Mangga': 20000,
-            'Kopi': 15000,
-            'Air Mineral': 5000,
-        };
 
         // Login button event
         document.getElementById('login-btn').addEventListener('click', function () {
@@ -110,21 +272,22 @@
             document.getElementById('login-form').style.display = 'block';
             document.getElementById('dashboard').style.display = 'none';
             orders = [];
-            totalPrice = 0;
             updateOrderList();
         });
 
         // Toggle Menu (Makanan / Minuman)
         function showMenu(menu) {
+            // Hide all menu containers
             document.getElementById('menu-makanan').style.display = 'none';
             document.getElementById('menu-minuman').style.display = 'none';
+
+            // Show selected menu
             document.getElementById('menu-' + menu).style.display = 'block';
         }
 
         // Add item to order list
         function addToOrder(item) {
             orders.push(item);
-            totalPrice += menuPrices[item];
             updateOrderList();
         }
 
@@ -135,13 +298,12 @@
 
             orders.forEach(item => {
                 const li = document.createElement('li');
-                li.textContent = `${item} - Rp ${menuPrices[item]}`;
+                li.textContent = item;
                 orderList.appendChild(li);
             });
 
             document.getElementById('total-order').textContent = orders.length;
-            document.getElementById('total-price').textContent = totalPrice;
         }
     </script>
 </body>
-</html>
+</html> 
