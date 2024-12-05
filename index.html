@@ -9,62 +9,6 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #fff8e1;
-            overflow: hidden;
-        }
-
-        .container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-        }
-
-        .hidden {
-            transform: translateX(-100%);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .login {
-            background-color: #ffe0b2;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .login h2 {
-            margin-bottom: 20px;
-            color: #bf360c;
-        }
-
-        .login input {
-            margin: 10px 0;
-            padding: 10px;
-            width: 80%;
-            border: 1px solid #bf360c;
-            border-radius: 5px;
-        }
-
-        .login button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff7043;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .dashboard {
-            text-align: center;
-            width: 100%;
-            height: 100%;
         }
 
         .sidebar {
@@ -97,7 +41,7 @@
             text-decoration: underline;
         }
 
-        .dashboard-content {
+        .main {
             margin-left: 250px;
             padding: 20px;
         }
@@ -105,27 +49,34 @@
         .cards-container {
             display: flex;
             gap: 20px;
-            justify-content: center;
+            justify-content: space-around;
+            margin-top: 20px;
         }
 
         .card {
-            background-color: #ffcc80;
-            color: #bf360c;
+            background-color: #ffe0b2;
             border-radius: 10px;
-            width: 200px;
+            width: 45%;
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .card img {
-            width: 50px;
-            height: 50px;
+            width: 80px;
+            height: 80px;
             margin-bottom: 10px;
         }
 
         .card h3 {
             margin-bottom: 10px;
+            color: #bf360c;
+        }
+
+        .card p {
+            font-size: 36px;
+            font-weight: bold;
+            color: #bf360c;
         }
 
         footer {
@@ -137,28 +88,25 @@
     </style>
 </head>
 <body>
-    <div id="login-container" class="container">
-        <div class="login">
-            <h2>Login</h2>
-            <input id="username" type="text" placeholder="Username"><br>
-            <input id="password" type="password" placeholder="Password"><br>
-            <button id="login-button">Login</button>
-        </div>
-    </div>
-    <div id="dashboard-container" class="container hidden">
+    <div>
         <div class="sidebar">
             <h1>Menu</h1>
             <a href="#">Dashboard</a>
         </div>
-        <div class="dashboard-content">
+        <div class="main">
             <div class="cards-container">
+                <!-- Card Makanan -->
                 <div class="card">
-                    <img src="https://via.placeholder.com/50?text=🍔" alt="Makanan">
+                    <!-- Logo makanan -->
+                    <img src="data:image/png;base64,[BASE64_LOGO_MAKANAN]" alt="Logo Makanan">
                     <h3>Makanan</h3>
                     <p>3</p>
                 </div>
+
+                <!-- Card Minuman -->
                 <div class="card">
-                    <img src="https://via.placeholder.com/50?text=🍹" alt="Minuman">
+                    <!-- Logo minuman -->
+                    <img src="data:image/png;base64,[BASE64_LOGO_MINUMAN]" alt="Logo Minuman">
                     <h3>Minuman</h3>
                     <p>3</p>
                 </div>
@@ -168,23 +116,5 @@
             </footer>
         </div>
     </div>
-
-    <script>
-        const loginContainer = document.getElementById('login-container');
-        const dashboardContainer = document.getElementById('dashboard-container');
-        const loginButton = document.getElementById('login-button');
-
-        loginButton.addEventListener('click', function () {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === "user" && password === "password") {
-                loginContainer.classList.add('hidden');
-                dashboardContainer.classList.remove('hidden');
-            } else {
-                alert("Invalid username or password.");
-            }
-        });
-    </script>
 </body>
 </html>
