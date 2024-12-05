@@ -131,7 +131,9 @@
             list-style-type: none;
             padding: 0;
             color: #bf360c;
-            display: none;
+            max-height: 0;  /* Initially collapsed */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out; /* Smooth transition */
         }
 
         .card ul li {
@@ -140,7 +142,14 @@
         }
 
         .card.active ul {
-            display: block;
+            max-height: 500px;  /* Height when expanded */
+        }
+
+        .card .item-count {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #bf360c;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -172,6 +181,7 @@
                     <li>Tahu Goreng</li>
                     <li>Pisang Goreng</li>
                 </ul>
+                <div class="item-count">Jumlah: 5</div>
             </div>
 
             <!-- Card Minuman -->
@@ -185,6 +195,7 @@
                     <li>Air Mineral</li>
                     <li>Soda</li>
                 </ul>
+                <div class="item-count">Jumlah: 5</div>
             </div>
         </div>
     </div>
