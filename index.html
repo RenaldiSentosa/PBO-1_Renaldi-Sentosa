@@ -225,27 +225,29 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
+            // Simple validation
             if (username === "user" && password === "password") {
-                // Simpan nama user di dashboard
+                // Set the user name in the dashboard
                 userNameDisplay.textContent = username;
 
-                // Sembunyikan login dan tampilkan dashboard
-                loginContainer.classList.remove('visible');
+                // Show the dashboard and hide the login form
                 loginContainer.classList.add('hidden');
-                dashboardContainer.classList.remove('hidden');
+                loginContainer.classList.remove('visible');
                 dashboardContainer.classList.add('visible');
+                dashboardContainer.classList.remove('hidden');
             } else {
                 alert("Username atau password salah!");
             }
         });
 
         logoutButton.addEventListener('click', function () {
-            // Kembali ke halaman login
-            loginContainer.classList.remove('hidden');
+            // Show the login form and hide the dashboard
             loginContainer.classList.add('visible');
-            dashboardContainer.classList.remove('visible');
+            loginContainer.classList.remove('hidden');
             dashboardContainer.classList.add('hidden');
+            dashboardContainer.classList.remove('visible');
         });
     </script>
+
 </body>
 </html>
