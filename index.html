@@ -3,340 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesan Makanan dan Minuman - Warung Keriting</title>
+    <title>Warung Kiting</title>
     <style>
+        /* Global Styles */
         body {
-            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-            color: #333;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #555;
         }
-        /* Login form */
-        #login-form {
-            text-align: center;
-            padding: 50px;
-            background-color: #ffcc00;
-            border-bottom: 2px solid #ff9900;
-        }
-        #login-form input {
-            padding: 10px;
-            margin: 10px 0;
-            width: 200px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        #login-form button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
+
+        h2, h3 {
+            margin: 0;
             font-weight: bold;
         }
-        #login-form button:hover {
-            background-color: #45a049;
+
+        /* Login Form Styles */
+        #login-form {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
         }
 
-        /* Dashboard */
-        #dashboard {
-            display: none;
-            padding: 20px;
-            background-color: #fff;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        #dashboard h1 {
-            color: #4CAF50;
+        #login-form h2 {
             margin-bottom: 20px;
+            color: #ff7043;
         }
-        #logout-btn {
-            padding: 10px 20px;
-            background-color: #f44336;
-            color: white;
+
+        #login-form input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #login-form button {
+            width: 95%;
+            padding: 10px;
             border: none;
             border-radius: 5px;
+            background-color: #ff7043;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
         }
-        #logout-btn:hover {
-            background-color: #e53935;
+
+        #login-form button:hover {
+            background-color: #e64a19;
         }
 
-        /* Menu Cards */
+        /* Dashboard Styles */
+        .main-content {
+            display: none;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff8e1;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff7043;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .welcome {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #ffe0b2;
+            color: #ff7043;
+            border-radius: 5px;
+        }
+
+        .welcome h2 {
+            margin: 0;
+        }
+
+        .welcome button {
+            background: #e64a19;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 8px 16px;
+            border: none;
+        }
+
+        .welcome button:hover {
+            background: #bf360c;
+        }
+
+        /* Menu Styles */
         .cards-container {
             display: flex;
             justify-content: space-around;
-            margin: 40px 0;
-            gap: 20px;
-        }
-        .card {
-            text-align: center;
-            width: 150px;
-            padding: 20px;
-            background-color: #ffecb3;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .card:hover {
-            background-color: #ffe082;
-            transform: scale(1.05);
-        }
-        .card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        .card h3 {
-            margin: 10px 0;
-            color: #4CAF50;
+            margin-top: 20px;
         }
 
-        /* Menu */
+        .card {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 20px;
+            width: 120px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
         .menu-container {
             display: none;
             margin-top: 20px;
         }
-        .menu-content p {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 18px;
-            margin: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #4CAF50;
-            transition: color 0.2s ease-in-out;
-        }
-        .menu-content p:hover {
-            color: #45a049;
-        }
-        .menu-content img {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+
+        .menu-container h4 {
+            color: #bf360c;
+            font-size: 22px;
         }
 
-        /* Order Summary */
+        .menu-content p {
+            cursor: pointer;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .menu-content p img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        /* Order Section Styles */
         .order-summary {
             margin-top: 30px;
+            padding: 20px;
+            background-color: #ffe0b2;
+            border-radius: 10px;
         }
-        #order-summary ul {
+
+        .order-summary h4 {
+            color: #bf360c;
+            font-size: 22px;
+        }
+
+        .order-summary ul {
             list-style-type: none;
             padding: 0;
         }
-        #order-summary ul li {
+
+        .order-summary ul li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            color: #bf360c;
             font-size: 16px;
-            margin: 5px 0;
         }
-        #order-summary h4 {
+
+        .order-summary ul li span {
             font-weight: bold;
         }
-        #total-price {
-            color: #4CAF50;
-            font-size: 20px;
-        }
 
-        /* Footer */
-        .footer {
-            background-color: #4CAF50;
+        .order-summary button {
+            background-color: #ff7043;
             color: white;
-            text-align: center;
-            padding: 15px 0;
-            position: fixed;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
             width: 100%;
-            bottom: 0;
+            cursor: pointer;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .cards-container {
-                flex-direction: column;
-                gap: 15px;
-            }
+        .order-summary button:hover {
+            background-color: #e64a19;
         }
-
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="header">
-        <h1>Warung Keriting</h1>
-    </div>
-
     <!-- Login Form -->
     <div id="login-form">
         <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username"><br>
-        <input type="password" id="password" placeholder="Password"><br>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
         <button id="login-btn">Login</button>
     </div>
 
-    <!-- Dashboard (hidden initially) -->
-    <div id="dashboard">
-        <h1>Selamat Datang, <span id="user-name"></span>!</h1>
-        <button id="logout-btn">Logout</button>
+    <!-- Dashboard -->
+    <div id="dashboard" class="main-content">
+        <div class="header">Warung Kiting</div>
+        <div class="welcome">
+            <h2>Welcome, <span id="user-name"></span></h2>
+            <button id="logout-btn">Logout</button>
+        </div>
 
-        <!-- Menu Cards -->
         <div class="cards-container">
-            <div class="card" id="makanan-menu">
-                <h3>Makanan</h3>
-                <img src="https://via.placeholder.com/100?text=Makanan" alt="Makanan">
+            <!-- Card Makanan -->
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Makanan" width="100" height="100">
+                <h3 class="menu-button" onclick="showMenu('makanan')">Makanan</h3>
             </div>
-            <div class="card" id="minuman-menu">
-                <h3>Minuman</h3>
-                <img src="https://via.placeholder.com/100?text=Minuman" alt="Minuman">
+
+            <!-- Card Minuman -->
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Minuman" width="100" height="100">
+                <h3 class="menu-button" onclick="showMenu('minuman')">Minuman</h3>
             </div>
         </div>
 
-        <!-- Makanan Menu -->
-        <div id="makanan-container" class="menu-container">
+        <!-- Menu Makanan -->
+        <div id="menu-makanan" class="menu-container">
             <h4>Menu Makanan</h4>
-            <div class="menu-content">
-                <p data-name="Mie Goreng" data-price="15000">
-                    <img src="https://via.placeholder.com/100?text=Mie+Goreng" alt="Mie Goreng">
-                    Mie Goreng - Rp 15,000
-                </p>
-                <p data-name="Mie Rebus" data-price="14000">
-                    <img src="https://via.placeholder.com/100?text=Mie+Rebus" alt="Mie Rebus">
-                    Mie Rebus - Rp 14,000
-                </p>
-                <p data-name="Bala-Bala" data-price="5000">
-                    <img src="https://via.placeholder.com/100?text=Bala-Bala" alt="Bala-Bala">
-                    Bala-Bala - Rp 5,000
-                </p>
-                <p data-name="Tahu Goreng" data-price="7000">
-                    <img src="https://via.placeholder.com/100?text=Tahu+Goreng" alt="Tahu Goreng">
-                    Tahu Goreng - Rp 7,000
-                </p>
-                <p data-name="Pisang Goreng" data-price="8000">
-                    <img src="https://via.placeholder.com/100?text=Pisang+Goreng" alt="Pisang Goreng">
-                    Pisang Goreng - Rp 8,000
-                </p>
-            </div>
+            <p onclick="addToOrder('Mie Goreng', 15000)">
+                <img src="https://i.pinimg.com/736x/dd/88/65/dd8865338cba785b7e4fc5b0ef511321.jpg" alt="Mie Goreng">Mie Goreng - Rp 15,000</p>
+            <p onclick="addToOrder('Mie Rebus', 14000)">
+                <img src="https://i.pinimg.com/736x/87/b7/25/87b7253554790eb1ee3ff3b9f4b3e2a2.jpg" alt="Mie Rebus">Mie Rebus - Rp 14,000</p>
+            <p onclick="addToOrder('Bala-Bala', 5000)">
+                <img src="https://i.pinimg.com/736x/ea/61/a1/ea61a12fa3c21cdc8ebe6a237f489744.jpg" alt="Bala-Bala">Bala-Bala - Rp 5,000</p>
+            <p onclick="addToOrder('Tahu Goreng', 7000)">
+                <img src="https://i.pinimg.com/736x/b5/2d/73/b52d738a062ceb6e0f0c68ba67ec9a3a.jpg" alt="Tahu Goreng">Tahu Goreng - Rp 7,000</p>
+            <p onclick="addToOrder('Pisang Goreng', 8000)">
+                <img src="https://i.pinimg.com/736x/fd/03/fc/fd03fc752571f9090ccf915ddec9dd49.jpg" alt="Pisang Goreng">Pisang Goreng - Rp 8,000</p>
         </div>
 
-        <!-- Minuman Menu -->
-        <div id="minuman-container" class="menu-container">
+        <!-- Menu Minuman -->
+        <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
-            <div class="menu-content">
-                <p data-name="Teh Manis" data-price="5000">
-                    <img src="https://via.placeholder.com/100?text=Teh+Manis" alt="Teh Manis">
-                    Teh Manis - Rp 5,000
-                </p>
-                <p data-name="Jus Mangga" data-price="10000">
-                    <img src="https://via.placeholder.com/100?text=Jus+Mangga" alt="Jus Mangga">
-                    Jus Mangga - Rp 10,000
-                </p>
-                <p data-name="Kopi" data-price="7000">
-                    <img src="https://via.placeholder.com/100?text=Kopi" alt="Kopi">
-                    Kopi - Rp 7,000
-                </p>
-                <p data-name="Air Mineral" data-price="4000">
-                    <img src="https://via.placeholder.com/100?text=Air+Mineral" alt="Air Mineral">
-                    Air Mineral - Rp 4,000
-                </p>
-                <p data-name="Es Jeruk" data-price="8000">
-                    <img src="https://via.placeholder.com/100?text=Es+Jeruk" alt="Es Jeruk">
-                    Es Jeruk - Rp 8,000
-                </p>
-            </div>
+            <p onclick="addToOrder('Teh Manis', 5000)">
+                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
+            <p onclick="addToOrder('Es Jeruk', 7000)">
+                <img src="https://i.pinimg.com/736x/32/eb/24/32eb2481a50b38503750c9ee7408fc2a.jpg" alt="Es Jeruk">Es Jeruk - Rp 7,000</p>
+            <p onclick="addToOrder('Jus Mangga', 8000)">
+                <img src="https://i.pinimg.com/736x/e7/69/da/e769da2b0747f496eddcc24bd707983d.jpg" alt="Jus Mangga">Jus Mangga - Rp 8,000</p>
+            <p onclick="addToOrder('Kopi', 10000)">
+                <img src="https://i.pinimg.com/736x/15/d2/9f/15d29ff436df5ccdf5834e01beef8c32.jpg" alt="Kopi">Kopi - Rp 10,000</p>
+            <p onclick="addToOrder('Air Mineral', 3000)">
+                <img src="https://i.pinimg.com/736x/e2/d0/dd/e2d0ddf3f5fc0345422834c67c5b888b.jpg" alt="Air Mineral">Air Mineral - Rp 3,000</p>
         </div>
 
         <!-- Order Summary -->
-        <div id="order-summary" class="order-summary">
-            <h4>Ringkasan Pesanan</h4>
+        <div class="order-summary">
+            <h4>Pesanan Anda</h4>
             <ul id="order-list"></ul>
-            <p>Total: <span id="total-price">0</span></p>
-            <button id="order-btn">Konfirmasi Pesanan</button>
+            <p><strong>Total Makanan & Minuman yang Dipesan: </strong><span id="total-order">0</span></p>
+            <p><strong>Total Harga: </strong><span id="total-price">Rp 0</span></p>
+            <button id="checkout-btn">Checkout</button>
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2024 Warung Keriting | Semua Hak Dilindungi</p>
-    </div>
-
     <script>
-        // Login function
-        document.getElementById('login-btn').addEventListener('click', () => {
+        // Handle Login
+        document.getElementById('login-btn').addEventListener('click', function() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            if (username === 'user' && password === 'password') {
+            // Username and password check
+            const validUsername = 'admin';
+            const validPassword = 'password123';
+
+            if (username === validUsername && password === validPassword) {
+                document.getElementById('user-name').innerText = username;
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
-                document.getElementById('user-name').textContent = username;
             } else {
-                alert('Username atau password salah!');
+                alert('Invalid username or password');
             }
         });
 
-        // Logout function
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            document.getElementById('login-form').style.display = 'block';
+        // Handle Logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
             document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
         });
 
-        // Switch between Makanan and Minuman menus
-        document.getElementById('makanan-menu').addEventListener('click', () => {
-            document.getElementById('makanan-container').style.display = 'block';
-            document.getElementById('minuman-container').style.display = 'none';
-        });
+        // Show Menu (Makanan/Minuman)
+        function showMenu(menuType) {
+            if (menuType === 'makanan') {
+                document.getElementById('menu-makanan').style.display = 'block';
+                document.getElementById('menu-minuman').style.display = 'none';
+            } else if (menuType === 'minuman') {
+                document.getElementById('menu-minuman').style.display = 'block';
+                document.getElementById('menu-makanan').style.display = 'none';
+            }
+        }
 
-        document.getElementById('minuman-menu').addEventListener('click', () => {
-            document.getElementById('minuman-container').style.display = 'block';
-            document.getElementById('makanan-container').style.display = 'none';
-        });
-
-        // Add item to order
-        document.querySelectorAll('.menu-content p').forEach(item => {
-            item.addEventListener('click', () => {
-                const name = item.getAttribute('data-name');
-                const price = parseInt(item.getAttribute('data-price'));
-                addToOrder(name, price);
-            });
-        });
-
-        // Add item to order array
-        let orderList = [];
+        // Add to Order
+        let order = [];
         let totalPrice = 0;
 
-        function addToOrder(name, price) {
-            orderList.push({ name, price });
+        function addToOrder(item, price) {
+            order.push(item);
             totalPrice += price;
-            updateOrderSummary();
+            document.getElementById('order-list').innerHTML = order.map(i => `<li>${i}</li>`).join('');
+            document.getElementById('total-order').innerText = order.length;
+            document.getElementById('total-price').innerText = 'Rp ' + totalPrice;
         }
-
-        // Update order summary
-        function updateOrderSummary() {
-            const orderListElement = document.getElementById('order-list');
-            orderListElement.innerHTML = '';
-            orderList.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${item.name} - Rp ${item.price}`;
-                orderListElement.appendChild(listItem);
-            });
-            document.getElementById('total-price').textContent = totalPrice;
-        }
-
-        // Confirm order
-        document.getElementById('order-btn').addEventListener('click', () => {
-            if (orderList.length > 0) {
-                alert('Pesanan Anda berhasil dikonfirmasi!');
-                orderList = [];
-                totalPrice = 0;
-                updateOrderSummary();
-            } else {
-                alert('Anda belum memilih makanan atau minuman.');
-            }
-        });
     </script>
 </body>
-</html>
+</html> 
