@@ -6,10 +6,11 @@
     <title>Pesan Makanan dan Minuman - Warung Keriting</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f8f8f8;
+            color: #333;
         }
         #login-form {
             text-align: center;
@@ -42,9 +43,11 @@
             border-radius: 8px;
             cursor: pointer;
             transition: transform 0.2s;
+            background-color: #ffecb3;
         }
         .card:hover {
             transform: scale(1.05);
+            background-color: #ffe082;
         }
         .menu-container {
             display: none;
@@ -53,9 +56,10 @@
         .menu-content p {
             margin: 10px 0;
             cursor: pointer;
+            font-size: 18px;
         }
         .menu-content p:hover {
-            color: blue;
+            color: #4CAF50;
         }
         .order-summary {
             margin-top: 20px;
@@ -66,6 +70,29 @@
         }
         #order-summary ul li {
             margin: 5px 0;
+        }
+        .footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        /* Style for Makanan and Minuman specific */
+        .menu-content img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .menu-content p {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: bold;
+            color: #4CAF50;
         }
     </style>
 </head>
@@ -105,23 +132,23 @@
             <h4>Menu Makanan</h4>
             <div class="menu-content">
                 <p data-name="Mie Goreng" data-price="15000">
-                    <img src="https://via.placeholder.com/50?text=Mie+Goreng" alt="Mie Goreng">
+                    <img src="https://via.placeholder.com/100?text=Mie+Goreng" alt="Mie Goreng">
                     Mie Goreng - Rp 15,000
                 </p>
                 <p data-name="Mie Rebus" data-price="14000">
-                    <img src="https://via.placeholder.com/50?text=Mie+Rebus" alt="Mie Rebus">
+                    <img src="https://via.placeholder.com/100?text=Mie+Rebus" alt="Mie Rebus">
                     Mie Rebus - Rp 14,000
                 </p>
                 <p data-name="Bala-Bala" data-price="5000">
-                    <img src="https://via.placeholder.com/50?text=Bala-Bala" alt="Bala-Bala">
+                    <img src="https://via.placeholder.com/100?text=Bala-Bala" alt="Bala-Bala">
                     Bala-Bala - Rp 5,000
                 </p>
                 <p data-name="Tahu Goreng" data-price="7000">
-                    <img src="https://via.placeholder.com/50?text=Tahu+Goreng" alt="Tahu Goreng">
+                    <img src="https://via.placeholder.com/100?text=Tahu+Goreng" alt="Tahu Goreng">
                     Tahu Goreng - Rp 7,000
                 </p>
                 <p data-name="Pisang Goreng" data-price="8000">
-                    <img src="https://via.placeholder.com/50?text=Pisang+Goreng" alt="Pisang Goreng">
+                    <img src="https://via.placeholder.com/100?text=Pisang+Goreng" alt="Pisang Goreng">
                     Pisang Goreng - Rp 8,000
                 </p>
             </div>
@@ -132,23 +159,23 @@
             <h4>Menu Minuman</h4>
             <div class="menu-content">
                 <p data-name="Teh Manis" data-price="5000">
-                    <img src="https://via.placeholder.com/50?text=Teh+Manis" alt="Teh Manis">
+                    <img src="https://via.placeholder.com/100?text=Teh+Manis" alt="Teh Manis">
                     Teh Manis - Rp 5,000
                 </p>
                 <p data-name="Jus Mangga" data-price="10000">
-                    <img src="https://via.placeholder.com/50?text=Jus+Mangga" alt="Jus Mangga">
+                    <img src="https://via.placeholder.com/100?text=Jus+Mangga" alt="Jus Mangga">
                     Jus Mangga - Rp 10,000
                 </p>
                 <p data-name="Kopi" data-price="7000">
-                    <img src="https://via.placeholder.com/50?text=Kopi" alt="Kopi">
+                    <img src="https://via.placeholder.com/100?text=Kopi" alt="Kopi">
                     Kopi - Rp 7,000
                 </p>
                 <p data-name="Air Mineral" data-price="4000">
-                    <img src="https://via.placeholder.com/50?text=Air+Mineral" alt="Air Mineral">
+                    <img src="https://via.placeholder.com/100?text=Air+Mineral" alt="Air Mineral">
                     Air Mineral - Rp 4,000
                 </p>
                 <p data-name="Es Jeruk" data-price="8000">
-                    <img src="https://via.placeholder.com/50?text=Es+Jeruk" alt="Es Jeruk">
+                    <img src="https://via.placeholder.com/100?text=Es+Jeruk" alt="Es Jeruk">
                     Es Jeruk - Rp 8,000
                 </p>
             </div>
@@ -163,6 +190,11 @@
             <h4>Total: Rp <span id="total-price">0</span></h4>
             <button id="order-btn">Konfirmasi Pesanan</button>
         </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Warung Keriting - Semua Hak Cipta Dilindungi</p>
     </div>
 
     <script>
@@ -200,25 +232,16 @@
             document.getElementById('makanan-container').style.display = 'none';
         });
 
-        // Add Makanan to order
-        document.querySelectorAll('#makanan-container .menu-content p').forEach(item => {
-            item.addEventListener('click', () => {
-                const name = item.getAttribute('data-name');
-                const price = parseInt(item.getAttribute('data-price'));
-                addToOrder(name, price);
-            });
-        });
-
-        // Add Minuman to order
-        document.querySelectorAll('#minuman-container .menu-content p').forEach(item => {
-            item.addEventListener('click', () => {
-                const name = item.getAttribute('data-name');
-                const price = parseInt(item.getAttribute('data-price'));
-                addToOrder(name, price);
-            });
-        });
-
         // Add item to order
+        document.querySelectorAll('.menu-content p').forEach(item => {
+            item.addEventListener('click', () => {
+                const name = item.getAttribute('data-name');
+                const price = parseInt(item.getAttribute('data-price'));
+                addToOrder(name, price);
+            });
+        });
+
+        // Add item to order array
         function addToOrder(name, price) {
             orderList.push({ name, price });
             totalPrice += price;
