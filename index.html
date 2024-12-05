@@ -12,65 +12,138 @@
             background-color: #f8f8f8;
             color: #333;
         }
+        /* Login form */
         #login-form {
             text-align: center;
             padding: 50px;
             background-color: #ffcc00;
+            border-bottom: 2px solid #ff9900;
         }
+        #login-form input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #login-form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #login-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Dashboard */
         #dashboard {
             display: none;
             padding: 20px;
             background-color: #fff;
-        }
-        h1 {
-            color: #4CAF50;
-        }
-        .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 0;
             text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
+        #dashboard h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        #logout-btn {
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #logout-btn:hover {
+            background-color: #e53935;
+        }
+
+        /* Menu Cards */
         .cards-container {
             display: flex;
             justify-content: space-around;
-            margin: 20px 0;
+            margin: 40px 0;
+            gap: 20px;
         }
         .card {
             text-align: center;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s;
+            width: 150px;
+            padding: 20px;
             background-color: #ffecb3;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         .card:hover {
-            transform: scale(1.05);
             background-color: #ffe082;
+            transform: scale(1.05);
         }
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            margin: 10px 0;
+            color: #4CAF50;
+        }
+
+        /* Menu */
         .menu-container {
             display: none;
             margin-top: 20px;
         }
         .menu-content p {
-            margin: 10px 0;
-            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             font-size: 18px;
+            margin: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #4CAF50;
+            transition: color 0.2s ease-in-out;
         }
         .menu-content p:hover {
-            color: #4CAF50;
+            color: #45a049;
         }
+        .menu-content img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* Order Summary */
         .order-summary {
-            margin-top: 20px;
+            margin-top: 30px;
         }
         #order-summary ul {
             list-style-type: none;
             padding: 0;
         }
         #order-summary ul li {
+            font-size: 16px;
             margin: 5px 0;
         }
+        #order-summary h4 {
+            font-weight: bold;
+        }
+        #total-price {
+            color: #4CAF50;
+            font-size: 20px;
+        }
+
+        /* Footer */
         .footer {
             background-color: #4CAF50;
             color: white;
@@ -80,20 +153,15 @@
             width: 100%;
             bottom: 0;
         }
-        /* Style for Makanan and Minuman specific */
-        .menu-content img {
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
-        .menu-content p {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-weight: bold;
-            color: #4CAF50;
-        }
+
     </style>
 </head>
 <body>
@@ -104,9 +172,9 @@
 
     <!-- Login Form -->
     <div id="login-form">
-        <h1>Login</h1>
-        <input type="text" id="username" placeholder="Username"><br><br>
-        <input type="password" id="password" placeholder="Password"><br><br>
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="password" id="password" placeholder="Password"><br>
         <button id="login-btn">Login</button>
     </div>
 
@@ -115,7 +183,7 @@
         <h1>Selamat Datang, <span id="user-name"></span>!</h1>
         <button id="logout-btn">Logout</button>
 
-        <!-- Menu Options -->
+        <!-- Menu Cards -->
         <div class="cards-container">
             <div class="card" id="makanan-menu">
                 <h3>Makanan</h3>
@@ -182,51 +250,46 @@
         </div>
 
         <!-- Order Summary -->
-        <div class="order-summary" id="order-summary">
-            <h4>Pesanan Anda</h4>
-            <ul id="order-list">
-                <!-- Order items will be added dynamically here -->
-            </ul>
-            <h4>Total: Rp <span id="total-price">0</span></h4>
+        <div id="order-summary" class="order-summary">
+            <h4>Ringkasan Pesanan</h4>
+            <ul id="order-list"></ul>
+            <p>Total: <span id="total-price">0</span></p>
             <button id="order-btn">Konfirmasi Pesanan</button>
         </div>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-        <p>&copy; 2024 Warung Keriting - Semua Hak Cipta Dilindungi</p>
+        <p>&copy; 2024 Warung Keriting | Semua Hak Dilindungi</p>
     </div>
 
     <script>
-        let username = '';
-        let orderList = [];
-        let totalPrice = 0;
-
-        // Show Dashboard after login
+        // Login function
         document.getElementById('login-btn').addEventListener('click', () => {
-            username = document.getElementById('username').value;
-            if(username !== '' && document.getElementById('password').value !== '') {
-                document.getElementById('user-name').textContent = username;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'user' && password === 'password') {
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('user-name').textContent = username;
             } else {
-                alert('Please fill in both fields.');
+                alert('Username atau password salah!');
             }
         });
 
-        // Logout button
+        // Logout function
         document.getElementById('logout-btn').addEventListener('click', () => {
             document.getElementById('login-form').style.display = 'block';
             document.getElementById('dashboard').style.display = 'none';
         });
 
-        // Display Makanan Menu
+        // Switch between Makanan and Minuman menus
         document.getElementById('makanan-menu').addEventListener('click', () => {
             document.getElementById('makanan-container').style.display = 'block';
             document.getElementById('minuman-container').style.display = 'none';
         });
 
-        // Display Minuman Menu
         document.getElementById('minuman-menu').addEventListener('click', () => {
             document.getElementById('minuman-container').style.display = 'block';
             document.getElementById('makanan-container').style.display = 'none';
@@ -242,6 +305,9 @@
         });
 
         // Add item to order array
+        let orderList = [];
+        let totalPrice = 0;
+
         function addToOrder(name, price) {
             orderList.push({ name, price });
             totalPrice += price;
