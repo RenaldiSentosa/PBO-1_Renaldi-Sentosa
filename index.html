@@ -259,32 +259,27 @@
             document.getElementById('dashboard').style.display = 'none';
         });
 
-        // Toggle Menu Content with transition
+        // Toggle menu visibility
         function toggleMenu(menuId) {
             const menu = document.getElementById(menuId);
             menu.classList.toggle('active');
         }
 
-        // Add to Order List
+        // Add to order
         function addToOrder(item) {
-            // Add item to orders array
             orders.push(item);
-            updateOrderSummary();
+            updateOrderList();
         }
 
-        // Update Order Summary
-        function updateOrderSummary() {
+        // Update the order list
+        function updateOrderList() {
             const orderList = document.getElementById('order-list');
-            orderList.innerHTML = ''; // Clear current list
-
-            // Create list items for each order
+            orderList.innerHTML = '';
             orders.forEach(item => {
                 const li = document.createElement('li');
                 li.textContent = item;
                 orderList.appendChild(li);
             });
-
-            // Update total order count
             document.getElementById('total-order').textContent = orders.length;
         }
     </script>
