@@ -3,21 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesan Makanan dan Minuman</title>
+    <title>Pesan Makanan dan Minuman - Warung Keriting</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f8f8f8;
         }
         #login-form {
             text-align: center;
             padding: 50px;
-            background-color: #f4f4f4;
+            background-color: #ffcc00;
         }
         #dashboard {
             display: none;
             padding: 20px;
+            background-color: #fff;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
         }
         .cards-container {
             display: flex;
@@ -59,6 +70,11 @@
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Warung Keriting</h1>
+    </div>
+
     <!-- Login Form -->
     <div id="login-form">
         <h1>Login</h1>
@@ -202,26 +218,26 @@
             });
         });
 
-        // Add item to order and update total
+        // Add item to order
         function addToOrder(name, price) {
-            orderList.push(name);
+            orderList.push({ name, price });
             totalPrice += price;
             updateOrderSummary();
         }
 
-        // Update the order summary
+        // Update order summary
         function updateOrderSummary() {
             const orderListElement = document.getElementById('order-list');
             orderListElement.innerHTML = '';
             orderList.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                orderListElement.appendChild(li);
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.name} - Rp ${item.price}`;
+                orderListElement.appendChild(listItem);
             });
             document.getElementById('total-price').textContent = totalPrice;
         }
 
-        // Confirm Order
+        // Confirm order
         document.getElementById('order-btn').addEventListener('click', () => {
             if (orderList.length > 0) {
                 alert('Pesanan Anda berhasil dikonfirmasi!');
