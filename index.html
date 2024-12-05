@@ -296,48 +296,36 @@
     </div>
 
     <script>
+        let accounts = [
+            { username: 'admin', password: '12345' },
+            { username: 'user', password: '54321' }
+        ];
+        
         let userName = '';
         const order = [];
-        const accounts = {
-            admin: { username: 'admin', password: 'admin' },
-            user: { username: 'user', password: 'user' }
-        };
     
         // Login Function
-        document.getElementById('login-btn').addEventListener('click', function () {
-            const usernameInput = document.getElementById('username').value;
-            const passwordInput = document.getElementById('password').value;
+        document.getElementById('login-btn').addEventListener('click', function() {
+            const inputUsername = document.getElementById('username').value;
+            const inputPassword = document.getElementById('password').value;
     
-            // Validate login
-            if (
-                usernameInput === accounts.admin.username &&
-                passwordInput === accounts.admin.password
-            ) {
-                alert('Login sebagai Admin berhasil');
-                userName = 'Admin';
-                document.getElementById('login-form').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-                document.getElementById('user-name').textContent = userName;
-                document.querySelector('.order-summary').style.display = 'none'; // Hide order section for Admin
-            } else if (
-                usernameInput === accounts.user.username &&
-                passwordInput === accounts.user.password
-            ) {
-                alert('Login sebagai User berhasil');
-                userName = 'User';
+            // Check if the username and password match any account
+            const account = accounts.find(acc => acc.username === inputUsername && acc.password === inputPassword);
+    
+            if (account) {
+                userName = account.username;
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
                 document.getElementById('user-name').textContent = userName;
             } else {
-                alert('Username atau Password salah!');
+                alert('Username atau password salah!');
             }
         });
     
         // Logout Function
-        document.getElementById('logout-btn').addEventListener('click', function () {
+        document.getElementById('logout-btn').addEventListener('click', function() {
             document.getElementById('dashboard').style.display = 'none';
             document.getElementById('login-form').style.display = 'block';
-            userName = '';
         });
     
         // Show Menu
@@ -351,10 +339,6 @@
     
         // Add item to order
         function addToOrder(item, price) {
-            if (userName !== 'User') {
-                alert('Hanya User yang dapat memesan!');
-                return;
-            }
             order.push({ item, price });
             updateOrderSummary();
         }
@@ -395,6 +379,6 @@
                 updateOrderSummary(); // Update order summary
             }
         }
-    </script>
+    </script>    
 </body>
 </html>
