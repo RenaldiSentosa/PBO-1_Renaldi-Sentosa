@@ -11,6 +11,40 @@
             background-color: #fff8e1;
         }
 
+        .hidden {
+            display: none;
+        }
+
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe0b2;
+        }
+
+        .login-container input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ff7043;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .login-container button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff7043;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #d84315;
+        }
+
         .sidebar {
             position: fixed;
             left: 0;
@@ -35,10 +69,6 @@
             color: white;
             margin: 10px 0;
             font-size: 16px;
-        }
-
-        .sidebar a:hover {
-            text-decoration: underline;
         }
 
         .main {
@@ -88,7 +118,16 @@
     </style>
 </head>
 <body>
-    <div>
+    <!-- Form Login -->
+    <div id="login-container" class="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button id="login-button">Login</button>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard-container" class="hidden">
         <div class="sidebar">
             <h1>Menu</h1>
             <a href="#">Dashboard</a>
@@ -97,7 +136,6 @@
             <div class="cards-container">
                 <!-- Card Makanan -->
                 <div class="card">
-                    <!-- Logo makanan -->
                     <img src="data:image/png;base64,[BASE64_LOGO_MAKANAN]" alt="Logo Makanan">
                     <h3>Makanan</h3>
                     <p>3</p>
@@ -105,7 +143,6 @@
 
                 <!-- Card Minuman -->
                 <div class="card">
-                    <!-- Logo minuman -->
                     <img src="data:image/png;base64,[BASE64_LOGO_MINUMAN]" alt="Logo Minuman">
                     <h3>Minuman</h3>
                     <p>3</p>
@@ -116,5 +153,20 @@
             </footer>
         </div>
     </div>
+
+    <script>
+        // Login logic
+        document.getElementById('login-button').addEventListener('click', function () {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === "user" && password === "password") {
+                document.getElementById('login-container').classList.add('hidden');
+                document.getElementById('dashboard-container').classList.remove('hidden');
+            } else {
+                alert("Username atau password salah!");
+            }
+        });
+    </script>
 </body>
 </html>
