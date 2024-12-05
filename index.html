@@ -64,7 +64,6 @@
         /* Dashboard Styles */
         .main-content {
             display: none;
-            margin: 0;
             padding: 20px;
             background-color: #fff8e1;
             min-height: 100vh;
@@ -112,19 +111,17 @@
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
-            flex-wrap: wrap;
         }
 
         .card {
             background-color: #fff;
             border: 1px solid #e0e0e0;
             border-radius: 5px;
-            padding: 10px;
+            padding: 20px;
             width: 120px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s;
-            margin-bottom: 15px;
         }
 
         .card:hover {
@@ -141,20 +138,21 @@
             font-size: 22px;
         }
 
-        .menu-container p {
+        .menu-content p {
             cursor: pointer;
             padding: 8px 0;
             display: flex;
             align-items: center;
-            font-size: 12px;
+            font-size: 16px;
         }
 
-        .menu-container p img {
-            width: 40px;
-            height: 40px;
+        .menu-content p img {
+            width: 30px;
+            height: 30px;
             margin-right: 10px;
         }
 
+        /* Order Section Styles */
         .order-summary {
             margin-top: 30px;
             padding: 20px;
@@ -178,10 +176,24 @@
             padding: 10px;
             border-radius: 5px;
             color: #bf360c;
-            font-size: 14px;
+            font-size: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .order-summary ul li button {
+            background-color: #e64a19;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .order-summary ul li button:hover {
+            background-color: #bf360c;
         }
 
         .order-summary button {
@@ -218,13 +230,10 @@
         </div>
 
         <div class="cards-container">
-            <!-- Card Makanan -->
             <div class="card">
                 <img src="https://via.placeholder.com/90" alt="Makanan">
                 <h3 class="menu-button" onclick="showMenu('makanan')">Makanan</h3>
             </div>
-
-            <!-- Card Minuman -->
             <div class="card">
                 <img src="https://via.placeholder.com/90" alt="Minuman">
                 <h3 class="menu-button" onclick="showMenu('minuman')">Minuman</h3>
@@ -239,6 +248,71 @@
             <p onclick="addToOrder('Mie Rebus', 14000)">
                 <img src="https://via.placeholder.com/40" alt="Mie Rebus">Mie Rebus - Rp 14,000</p>
         </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h4>Pesanan</h4>
+            <ul id="order-list"></ul>
+            <p>Total Harga: Rp <span id="total-amount">0</span></p>
+            <button onclick="clearOrder()">Hapus Semua Pesanan</button>
+        </div>
     </div>
+
+    <script>
+        // Login
+        document.getElementById('login-btn').addEventListener('click', function () {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username && password) {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('user-name').innerText = username;
+            } else {
+                alert('Silakan masukkan username dan password.');
+            }
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', function () {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+            clearOrder();
+        });
+
+        // Menu Navigation
+        function showMenu(menu) {
+            document.getElementById('menu-makanan').style.display = menu === 'makanan' ? 'block' : 'none';
+        }
+
+        // Order Handling
+        const orderList = document.getElementById('order-list');
+        const totalAmount = document.getElementById('total-amount');
+        let total = 0;
+
+        function addToOrder(name, price) {
+            const orderItem = document.createElement('li');
+            orderItem.innerHTML = `
+                ${name} - Rp ${price} 
+                <button onclick="removeItem(this, ${price})">Hapus</button>
+            `;
+            orderList.appendChild(orderItem);
+
+            total += price;
+            totalAmount.innerText = total;
+        }
+
+        function removeItem(button, price) {
+            button.parentElement.remove();
+            total -= price;
+            totalAmount.innerText = total;
+        }
+
+        function clearOrder() {
+            orderList.innerHTML = '';
+            total = 0;
+            totalAmount.innerText = total;
+        }
+    </script>
 </body>
 </html>
