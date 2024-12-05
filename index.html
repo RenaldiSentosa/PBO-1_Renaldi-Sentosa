@@ -359,9 +359,9 @@
         // Checkout Function
         function checkout() {
             if (order.length === 0) {
-                alert('Your order is empty!');
+                alert('Kamu Belum Memesan!');
             } else {
-                alert(`Thank you for your order! Total: Rp ${order.reduce((sum, item) => sum + item.price, 0)}`);
+                alert(`Terima Kasih Sudah Memesan! Total: Rp ${order.reduce((sum, item) => sum + item.price, 0)}`);
                 order.length = 0; // Clear the order
                 updateOrderSummary(); // Update order summary
             }
