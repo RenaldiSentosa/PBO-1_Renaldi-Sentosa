@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Makanan dan Minuman</title>
+    <title>Makanan dan Minuman</title>
     <style>
         body {
             margin: 0;
@@ -15,6 +15,7 @@
             height: 100vh;
         }
 
+        /* Form Login */
         .login-container {
             background-color: #fff;
             padding: 30px;
@@ -22,6 +23,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
+            display: block;
         }
 
         .login-container h2 {
@@ -70,20 +72,91 @@
             background-color: #ff5722;
         }
 
-        .login-container p {
-            text-align: center;
-            font-size: 14px;
+        /* Menu Dashboard */
+        .dashboard-container {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 20px;
+            padding: 20px;
         }
 
-        .login-container p a {
-            color: #ff7043;
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #ff7043;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
             text-decoration: none;
+            color: white;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #ffe0b2;
+            border-radius: 10px;
+            width: 45%;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #bf360c;
+        }
+
+        .card p {
+            font-size: 36px;
+            font-weight: bold;
+            color: #bf360c;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: gray;
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
+    <!-- Login Form -->
+    <div class="login-container" id="login-container">
         <h2>Login</h2>
         <form id="loginForm">
             <div class="input-group">
@@ -98,7 +171,42 @@
         </form>
     </div>
 
+    <!-- Dashboard Menu -->
+    <div class="dashboard-container" id="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h1>Menu</h1>
+            <a href="#">Dashboard</a>
+            <a href="#" id="logout-btn">Logout</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content" style="margin-left: 250px; padding: 20px;">
+            <p>Welcome, <span id="username-display">user</span>!</p>
+
+            <div class="cards-container">
+                <!-- Card Makanan -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/80" alt="Logo Makanan">
+                    <h3>Makanan</h3>
+                    <p>3</p>
+                </div>
+
+                <!-- Card Minuman -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/80" alt="Logo Minuman">
+                    <h3>Minuman</h3>
+                    <p>3</p>
+                </div>
+            </div>
+            <footer>
+                Made with ❤️ by kiting.id
+            </footer>
+        </div>
+    </div>
+
     <script>
+        // Handle login logic
         document.getElementById("loginForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
@@ -106,11 +214,22 @@
             const password = document.getElementById("password").value;
 
             if (username === "user" && password === "password") {
-                alert("Login successful!");
-                // Redirect or display dashboard logic here
+                // Hide login form and show dashboard
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("dashboard-container").style.display = "flex";
+
+                // Display username
+                document.getElementById("username-display").innerText = username;
             } else {
                 alert("Invalid username or password");
             }
+        });
+
+        // Handle logout logic
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            // Show login form and hide dashboard
+            document.getElementById("login-container").style.display = "block";
+            document.getElementById("dashboard-container").style.display = "none";
         });
     </script>
 
