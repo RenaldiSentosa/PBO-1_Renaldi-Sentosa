@@ -113,7 +113,6 @@
             text-align: center;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
         }
 
         .card img {
@@ -127,29 +126,28 @@
             color: #bf360c;
         }
 
-        .card ul {
-            list-style-type: none;
-            padding: 0;
-            color: #bf360c;
-            max-height: 0;  /* Initially collapsed */
-            overflow: hidden;
-            transition: max-height 0.3s ease-out; /* Smooth transition */
-        }
-
-        .card ul li {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .card.active ul {
-            max-height: 500px;  /* Height when expanded */
-        }
-
-        .card .item-count {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #bf360c;
+        .card p {
+            font-size: 36px;
             font-weight: bold;
+            color: #bf360c;
+        }
+
+        /* Transition Styles */
+        .menu-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .menu-content.active {
+            max-height: 1000px;
+        }
+
+        .menu-button {
+            cursor: pointer;
+            color: #ff7043;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -171,31 +169,27 @@
         </div>
         <div class="cards-container">
             <!-- Card Makanan -->
-            <div class="card" id="makanan-card">
-                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Logo Makanan">
-                <h3>Makanan</h3>
-                <ul>
-                    <li>Mie Goreng</li>
-                    <li>Mie Rebus</li>
-                    <li>Bala-Bala</li>
-                    <li>Tahu Goreng</li>
-                    <li>Pisang Goreng</li>
-                </ul>
-                <div class="item-count">Jumlah: 5</div>
+            <div class="card">
+                <h3 class="menu-button" onclick="toggleMenu('makanan')">Makanan</h3>
+                <div id="makanan" class="menu-content">
+                    <p>Mie Goreng</p>
+                    <p>Mie Rebus</p>
+                    <p>Bala-Bala</p>
+                    <p>Tahu Goreng</p>
+                    <p>Pisang Goreng</p>
+                </div>
             </div>
 
             <!-- Card Minuman -->
-            <div class="card" id="minuman-card">
-                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Logo Minuman">
-                <h3>Minuman</h3>
-                <ul>
-                    <li>Es Teh</li>
-                    <li>Es Jeruk</li>
-                    <li>Kopi</li>
-                    <li>Air Mineral</li>
-                    <li>Soda</li>
-                </ul>
-                <div class="item-count">Jumlah: 5</div>
+            <div class="card">
+                <h3 class="menu-button" onclick="toggleMenu('minuman')">Minuman</h3>
+                <div id="minuman" class="menu-content">
+                    <p>Teh Manis</p>
+                    <p>Es Jeruk</p>
+                    <p>Jus Mangga</p>
+                    <p>Kopi</p>
+                    <p>Air Mineral</p>
+                </div>
             </div>
         </div>
     </div>
@@ -226,14 +220,11 @@
             document.getElementById('dashboard').style.display = 'none';
         });
 
-        // Toggle menu items visibility when clicking on the cards
-        document.getElementById('makanan-card').addEventListener('click', function () {
-            this.classList.toggle('active');
-        });
-
-        document.getElementById('minuman-card').addEventListener('click', function () {
-            this.classList.toggle('active');
-        });
+        // Toggle Menu Content with transition
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            menu.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
