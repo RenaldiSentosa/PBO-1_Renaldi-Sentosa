@@ -125,12 +125,6 @@
             transition: transform 0.3s;
         }
 
-        .card img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
-        }
-
         .card:hover {
             transform: scale(1.05);
         }
@@ -226,13 +220,13 @@
         <div class="cards-container">
             <!-- Card Makanan -->
             <div class="card">
-                <img src="food-icon.png" alt="Food Icon">
+                <img src="images/makanan.png" alt="Makanan" width="100%">
                 <h3 class="menu-button" onclick="showMenu('makanan')">Makanan</h3>
             </div>
 
             <!-- Card Minuman -->
             <div class="card">
-                <img src="drink-icon.png" alt="Drink Icon">
+                <img src="images/minuman.png" alt="Minuman" width="100%">
                 <h3 class="menu-button" onclick="showMenu('minuman')">Minuman</h3>
             </div>
         </div>
@@ -241,19 +235,19 @@
         <div id="menu-makanan" class="menu-container">
             <h4>Menu Makanan</h4>
             <p onclick="addToOrder('Mie Goreng', 15000)">
-                <img src="mie-goreng.png" alt="Mie Goreng"> Mie Goreng - Rp 15,000
+                <img src="images/mie-goreng.png" alt="Mie Goreng"> Mie Goreng - Rp 15,000
             </p>
             <p onclick="addToOrder('Mie Rebus', 14000)">
-                <img src="mie-rebus.png" alt="Mie Rebus"> Mie Rebus - Rp 14,000
+                <img src="images/mie-rebus.png" alt="Mie Rebus"> Mie Rebus - Rp 14,000
             </p>
             <p onclick="addToOrder('Bala-Bala', 5000)">
-                <img src="bala-bala.png" alt="Bala-Bala"> Bala-Bala - Rp 5,000
+                <img src="images/bala-bala.png" alt="Bala-Bala"> Bala-Bala - Rp 5,000
             </p>
             <p onclick="addToOrder('Tahu Goreng', 7000)">
-                <img src="tahu-goreng.png" alt="Tahu Goreng"> Tahu Goreng - Rp 7,000
+                <img src="images/tahu-goreng.png" alt="Tahu Goreng"> Tahu Goreng - Rp 7,000
             </p>
             <p onclick="addToOrder('Pisang Goreng', 8000)">
-                <img src="pisang-goreng.png" alt="Pisang Goreng"> Pisang Goreng - Rp 8,000
+                <img src="images/pisang-goreng.png" alt="Pisang Goreng"> Pisang Goreng - Rp 8,000
             </p>
         </div>
 
@@ -261,19 +255,19 @@
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
             <p onclick="addToOrder('Teh Manis', 5000)">
-                <img src="teh-manis.png" alt="Teh Manis"> Teh Manis - Rp 5,000
+                <img src="images/teh-manis.png" alt="Teh Manis"> Teh Manis - Rp 5,000
             </p>
             <p onclick="addToOrder('Es Jeruk', 7000)">
-                <img src="es-jeruk.png" alt="Es Jeruk"> Es Jeruk - Rp 7,000
+                <img src="images/es-jeruk.png" alt="Es Jeruk"> Es Jeruk - Rp 7,000
             </p>
             <p onclick="addToOrder('Jus Mangga', 8000)">
-                <img src="jus-mangga.png" alt="Jus Mangga"> Jus Mangga - Rp 8,000
+                <img src="images/jus-mangga.png" alt="Jus Mangga"> Jus Mangga - Rp 8,000
             </p>
             <p onclick="addToOrder('Kopi', 10000)">
-                <img src="kopi.png" alt="Kopi"> Kopi - Rp 10,000
+                <img src="images/kopi.png" alt="Kopi"> Kopi - Rp 10,000
             </p>
             <p onclick="addToOrder('Air Mineral', 3000)">
-                <img src="air-mineral.png" alt="Air Mineral"> Air Mineral - Rp 3,000
+                <img src="images/air-mineral.png" alt="Air Mineral"> Air Mineral - Rp 3,000
             </p>
         </div>
 
@@ -281,69 +275,67 @@
         <div class="order-summary">
             <h4>Pesanan Anda</h4>
             <ul id="order-list"></ul>
-            <button onclick="checkout()">Checkout</button>
+            <p><strong>Total Makanan & Minuman yang Dipesan: </strong><span id="total-order"></span></p>
+            <button id="place-order-btn">Pesan</button>
         </div>
     </div>
 
     <script>
-        const loginForm = document.getElementById("login-form");
-        const dashboard = document.getElementById("dashboard");
-        const usernameField = document.getElementById("username");
-        const passwordField = document.getElementById("password");
-        const loginButton = document.getElementById("login-btn");
-        const logoutButton = document.getElementById("logout-btn");
-        const userNameDisplay = document.getElementById("user-name");
-        const menuContainers = document.querySelectorAll(".menu-container");
-        const orderList = document.getElementById("order-list");
-        let orderItems = [];
+        // Variables
+        let username = '';
+        let orderList = [];
+        let totalAmount = 0;
 
-        loginButton.onclick = function() {
-            const username = usernameField.value;
-            const password = passwordField.value;
-
-            // Simple login validation
-            if (username === "admin" && password === "admin") {
-                loginForm.style.display = "none";
-                dashboard.style.display = "block";
-                userNameDisplay.innerText = username;
+        // Handle Login
+        document.getElementById('login-btn').addEventListener('click', function() {
+            username = document.getElementById('username').value;
+            if (username) {
+                document.getElementById('user-name').innerText = username;
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
             } else {
-                alert("Username or password incorrect");
+                alert('Please enter a username');
             }
-        };
+        });
 
-        logoutButton.onclick = function() {
-            dashboard.style.display = "none";
-            loginForm.style.display = "block";
-        };
+        // Handle Logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
 
-        function showMenu(menuType) {
-            menuContainers.forEach(container => container.style.display = "none");
-            document.getElementById(`menu-${menuType}`).style.display = "block";
+        // Show Menu
+        function showMenu(type) {
+            document.getElementById('menu-makanan').style.display = 'none';
+            document.getElementById('menu-minuman').style.display = 'none';
+            document.getElementById('order-list').innerHTML = '';
+            document.getElementById('total-order').innerText = '0';
+            if (type === 'makanan') {
+                document.getElementById('menu-makanan').style.display = 'block';
+            } else if (type === 'minuman') {
+                document.getElementById('menu-minuman').style.display = 'block';
+            }
         }
 
-        function addToOrder(itemName, price) {
-            orderItems.push({ name: itemName, price: price });
-            updateOrderList();
+        // Add Order to List
+        function addToOrder(item, price) {
+            orderList.push({ item, price });
+            totalAmount += price;
+            updateOrderSummary();
         }
 
-        function updateOrderList() {
-            orderList.innerHTML = "";
-            let total = 0;
-            orderItems.forEach(item => {
-                const listItem = document.createElement("li");
-                listItem.innerHTML = `${item.name} - Rp ${item.price}`;
-                orderList.appendChild(listItem);
-                total += item.price;
+        // Update Order Summary
+        function updateOrderSummary() {
+            const orderListContainer = document.getElementById('order-list');
+            orderListContainer.innerHTML = '';
+            orderList.forEach(order => {
+                const li = document.createElement('li');
+                li.innerHTML = `${order.item} - Rp ${order.price}`;
+                orderListContainer.appendChild(li);
             });
-            const totalItem = document.createElement("li");
-            totalItem.innerHTML = `<strong>Total: Rp ${total}</strong>`;
-            orderList.appendChild(totalItem);
-        }
-
-        function checkout() {
-            alert("Checkout successful!");
-            orderItems = [];
-            updateOrderList();
+            document.getElementById('total-order').innerText = `Rp ${totalAmount}`;
         }
     </script>
 </body>
