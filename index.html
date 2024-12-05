@@ -5,86 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makanan dan Minuman</title>
     <style>
-        /* Reset Margin */
-        body, h1, h2, p {
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
             background-color: #fff8e1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Form Login */
-        .login-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            display: block;
-        }
-
-        .login-container h2 {
-            text-align: center;
-            color: #ff7043;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #ff7043;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ff7043;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        .input-group input:focus {
-            border-color: #ff5722;
-            outline: none;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 10px;
-            background-color: #ff7043;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .login-btn:hover {
-            background-color: #ff5722;
-        }
-
-        /* Menu Dashboard */
-        .dashboard-container {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            max-width: 1000px;
-            margin-top: 20px;
-            padding: 20px;
         }
 
         .sidebar {
@@ -98,7 +22,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
         }
 
         .sidebar h1 {
@@ -115,6 +39,47 @@
 
         .sidebar a:hover {
             text-decoration: underline;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .login-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            width: 85%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            width: 50%;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            background: #007BFF;
+            color: white;
+        }
+
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
         }
 
         .cards-container {
@@ -157,65 +122,71 @@
             color: gray;
         }
 
-        /* Responsive Style */
-        @media (max-width: 768px) {
-            .cards-container {
-                flex-direction: column;
-                align-items: center;
-            }
+        .welcome {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-            .card {
-                width: 80%;
-            }
+        .welcome h2 {
+            color: #ff7043;
+        }
+
+        .welcome button {
+            background: #ff7043;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+
+        .welcome button:hover {
+            background: #e64a19;
         }
     </style>
 </head>
 <body>
-
-    <!-- Form Login -->
-    <div class="login-container" id="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="login-btn">Login</button>
-        </form>
-    </div>
-
-    <!-- Dashboard Menu -->
-    <div class="dashboard-container" id="dashboard-container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <h1>Menu</h1>
-            <a href="#">Dashboard</a>
-            <a href="#" id="logout-btn">Logout</a>
+    <div id="root">
+        <!-- Login Form -->
+        <div id="login-form" class="login-form">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button id="login-btn">Login</button>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content" style="margin-left: 250px; padding: 20px;">
-            <p>Welcome, <span id="username-display">user</span>!</p>
+        <!-- Dashboard (Hidden by default) -->
+        <div id="dashboard" class="main" style="display:none;">
+            <div class="sidebar">
+                <h1>Menu</h1>
+                <a href="#">Dashboard</a>
+            </div>
 
-            <div class="cards-container">
-                <!-- Card Makanan -->
-                <div class="card">
-                    <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg">
-                    <h3>Makanan</h3>
-                    <p>3</p>
+            <div class="main-content">
+                <div class="welcome">
+                    <h2>Welcome, <span id="user-name"></span></h2>
+                    <button id="logout-btn">Logout</button>
                 </div>
 
-                <!-- Card Minuman -->
-                <div class="card">
-                    <img src="https://via.placeholder.com/80" alt="Logo Minuman">
-                    <h3>Minuman</h3>
-                    <p>3</p>
+                <div class="cards-container">
+                    <!-- Card Makanan -->
+                    <div class="card">
+                        <!-- Logo makanan -->
+                        <img src="https://via.placeholder.com/80?text=🍔" alt="Logo Makanan">
+                        <h3>Makanan</h3>
+                        <p>3</p>
+                    </div>
+
+                    <!-- Card Minuman -->
+                    <div class="card">
+                        <!-- Logo minuman -->
+                        <img src="https://via.placeholder.com/80?text=🍹" alt="Logo Minuman">
+                        <h3>Minuman</h3>
+                        <p>3</p>
+                    </div>
                 </div>
             </div>
+
             <footer>
                 Made with ❤️ by kiting.id
             </footer>
@@ -223,33 +194,33 @@
     </div>
 
     <script>
-        // Handle login logic
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+        // Mock user data
+        const users = [
+            { username: 'Renaldi', password: 'Renaldi123' },
+            { username: 'Karina', password: 'Karina123' },
+        ];
 
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+        document.getElementById('login-btn').addEventListener('click', function () {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-            // Login validation
-            if (username === "user" && password === "password") {
-                // Hide login form and show dashboard
-                document.getElementById("login-container").style.display = "none";
-                document.getElementById("dashboard-container").style.display = "flex";
+            const user = users.find(u => u.username === username && u.password === password);
 
-                // Display username
-                document.getElementById("username-display").innerText = username;
+            if (user) {
+                // Show Dashboard and hide Login Form
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('user-name').textContent = user.username;
             } else {
-                alert("Invalid username or password");
+                alert('Username or Password is incorrect!');
             }
         });
 
-        // Handle logout logic
-        document.getElementById("logout-btn").addEventListener("click", function() {
-            // Show login form and hide dashboard
-            document.getElementById("login-container").style.display = "block";
-            document.getElementById("dashboard-container").style.display = "none";
+        document.getElementById('logout-btn').addEventListener('click', function () {
+            // Hide Dashboard and show Login Form again
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
         });
     </script>
-
 </body>
 </html>
