@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makanan dan Minuman</title>
     <style>
+        /* Global Styles */
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
@@ -15,29 +16,38 @@
             display: none;
         }
 
+        /* Login Form Styles */
         .login-container {
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #ffe0b2;
+            background-color: #fff3e0;
+        }
+
+        .login-container h1 {
+            font-size: 24px;
+            color: #ff7043;
+            margin-bottom: 20px;
         }
 
         .login-container input {
-            margin: 10px 0;
+            display: block;
+            width: 250px;
             padding: 10px;
-            border: 1px solid #ff7043;
+            margin: 10px 0;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            width: 200px;
         }
 
         .login-container button {
-            padding: 10px 20px;
+            width: 270px;
+            padding: 10px;
             border: none;
+            border-radius: 5px;
             background-color: #ff7043;
             color: white;
-            border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
         }
 
@@ -45,6 +55,7 @@
             background-color: #d84315;
         }
 
+        /* Sidebar Styles */
         .sidebar {
             position: fixed;
             left: 0;
@@ -71,6 +82,11 @@
             font-size: 16px;
         }
 
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dashboard Styles */
         .main {
             margin-left: 250px;
             padding: 20px;
@@ -118,12 +134,14 @@
     </style>
 </head>
 <body>
-    <!-- Form Login -->
+    <!-- Login Form -->
     <div id="login-container" class="login-container">
-        <h1>Login</h1>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button id="login-button">Login</button>
+        <div>
+            <h1>Login</h1>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button id="login-button">Login</button>
+        </div>
     </div>
 
     <!-- Dashboard -->
@@ -155,12 +173,14 @@
     </div>
 
     <script>
-        // Login logic
+        // Login Logic
         document.getElementById('login-button').addEventListener('click', function () {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
+            // Validasi username dan password
             if (username === "user" && password === "password") {
+                // Hide login and show dashboard
                 document.getElementById('login-container').classList.add('hidden');
                 document.getElementById('dashboard-container').classList.remove('hidden');
             } else {
