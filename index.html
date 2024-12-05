@@ -119,8 +119,8 @@
             background-color: #fff;
             border: 1px solid #e0e0e0;
             border-radius: 5px;
-            padding: 20px;
-            width: 150px;
+            padding: 10px;
+            width: 120px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s;
@@ -146,12 +146,12 @@
             padding: 8px 0;
             display: flex;
             align-items: center;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .menu-content p img {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             margin-right: 10px;
         }
 
@@ -179,7 +179,10 @@
             padding: 10px;
             border-radius: 5px;
             color: #bf360c;
-            font-size: 16px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .order-summary ul li span {
@@ -200,6 +203,12 @@
         .order-summary button:hover {
             background-color: #e64a19;
         }
+
+        .order-summary button:disabled {
+            background-color: #d3d3d3;
+            cursor: not-allowed;
+        }
+
     </style>
 </head>
 <body>
@@ -222,13 +231,13 @@
         <div class="cards-container">
             <!-- Card Makanan -->
             <div class="card">
-                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Makanan" width="100" height="100">
+                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Makanan" width="90" height="90">
                 <h3 class="menu-button" onclick="showMenu('makanan')">Makanan</h3>
             </div>
 
             <!-- Card Minuman -->
             <div class="card">
-                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Minuman" width="100" height="100">
+                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Minuman" width="90" height="90">
                 <h3 class="menu-button" onclick="showMenu('minuman')">Minuman</h3>
             </div>
         </div>
@@ -245,23 +254,21 @@
             <p onclick="addToOrder('Tahu Goreng', 7000)">
                 <img src="https://i.pinimg.com/736x/b5/2d/73/b52d738a062ceb6e0f0c68ba67ec9a3a.jpg" alt="Tahu Goreng">Tahu Goreng - Rp 7,000</p>
             <p onclick="addToOrder('Pisang Goreng', 8000)">
-                <img src="https://i.pinimg.com/736x/fd/03/fc/fd03fc752571f9090ccf915ddec9dd49.jpg" alt="Pisang Goreng">Pisang Goreng - Rp 8,000</p>
+                <img src="https://i.pinimg.com/736x/fd/4b/4f/fd4b4ff0537ea6730e7c212035cced2d.jpg" alt="Pisang Goreng">Pisang Goreng - Rp 8,000</p>
         </div>
 
         <!-- Menu Minuman -->
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
-            <p onclick="addToOrder('Teh Manis', 5000)">
-                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
             <p onclick="addToOrder('Es Teh', 7000)">
                 <img src="https://i.pinimg.com/736x/e0/fe/97/e0fe97a118b16e36df7e020d7b4299ec.jpg" alt="Es Teh">Es Teh - Rp 7,000</p>
             <p onclick="addToOrder('Jeruk Peras', 6000)">
                 <img src="https://i.pinimg.com/736x/ae/69/36/ae693634f99bc97b6232cf20a5e72c82.jpg" alt="Jeruk Peras">Jeruk Peras - Rp 6,000</p>
         </div>
 
-        <!-- Order Summary -->
+        <!-- Pesanan -->
         <div id="order-summary" class="order-summary">
-            <h4>Order Summary</h4>
+            <h4>Pesanan</h4>
             <ul id="order-list"></ul>
             <button id="checkout-btn" onclick="checkout()">Bayar</button>
         </div>
@@ -304,12 +311,21 @@
             order.forEach(orderItem => {
                 const li = document.createElement('li');
                 li.textContent = `${orderItem.item} - Rp ${orderItem.price}`;
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.onclick = () => removeFromOrder(orderItem);
+                li.appendChild(removeBtn);
                 orderList.appendChild(li);
                 total += orderItem.price;
             });
             const totalLi = document.createElement('li');
             totalLi.textContent = `Total: Rp ${total}`;
             orderList.appendChild(totalLi);
+        }
+
+        function removeFromOrder(orderItem) {
+            order = order.filter(item => item !== orderItem);
+            updateOrderSummary();
         }
 
         function checkout() {
