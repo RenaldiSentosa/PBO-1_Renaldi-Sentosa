@@ -142,6 +142,14 @@
         .menu-content p {
             cursor: pointer;
             padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-content p img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
         }
 
         .menu-content.active {
@@ -204,25 +212,27 @@
         <div class="cards-container">
             <!-- Card Makanan -->
             <div class="card">
+                <img src="https://via.placeholder.com/80" alt="Makanan">
                 <h3 class="menu-button" onclick="toggleMenu('makanan')">Makanan</h3>
                 <div id="makanan" class="menu-content">
-                    <p onclick="addToOrder('Mie Goreng')">Mie Goreng</p>
-                    <p onclick="addToOrder('Mie Rebus')">Mie Rebus</p>
-                    <p onclick="addToOrder('Bala-Bala')">Bala-Bala</p>
-                    <p onclick="addToOrder('Tahu Goreng')">Tahu Goreng</p>
-                    <p onclick="addToOrder('Pisang Goreng')">Pisang Goreng</p>
+                    <p onclick="addToOrder('Mie Goreng')"><img src="https://via.placeholder.com/30" alt="Mie Goreng">Mie Goreng</p>
+                    <p onclick="addToOrder('Mie Rebus')"><img src="https://via.placeholder.com/30" alt="Mie Rebus">Mie Rebus</p>
+                    <p onclick="addToOrder('Bala-Bala')"><img src="https://via.placeholder.com/30" alt="Bala-Bala">Bala-Bala</p>
+                    <p onclick="addToOrder('Tahu Goreng')"><img src="https://via.placeholder.com/30" alt="Tahu Goreng">Tahu Goreng</p>
+                    <p onclick="addToOrder('Pisang Goreng')"><img src="https://via.placeholder.com/30" alt="Pisang Goreng">Pisang Goreng</p>
                 </div>
             </div>
 
             <!-- Card Minuman -->
             <div class="card">
+                <img src="https://via.placeholder.com/80" alt="Minuman">
                 <h3 class="menu-button" onclick="toggleMenu('minuman')">Minuman</h3>
                 <div id="minuman" class="menu-content">
-                    <p onclick="addToOrder('Teh Manis')">Teh Manis</p>
-                    <p onclick="addToOrder('Es Jeruk')">Es Jeruk</p>
-                    <p onclick="addToOrder('Jus Mangga')">Jus Mangga</p>
-                    <p onclick="addToOrder('Kopi')">Kopi</p>
-                    <p onclick="addToOrder('Air Mineral')">Air Mineral</p>
+                    <p onclick="addToOrder('Teh Manis')"><img src="https://via.placeholder.com/30" alt="Teh Manis">Teh Manis</p>
+                    <p onclick="addToOrder('Es Jeruk')"><img src="https://via.placeholder.com/30" alt="Es Jeruk">Es Jeruk</p>
+                    <p onclick="addToOrder('Jus Mangga')"><img src="https://via.placeholder.com/30" alt="Jus Mangga">Jus Mangga</p>
+                    <p onclick="addToOrder('Kopi')"><img src="https://via.placeholder.com/30" alt="Kopi">Kopi</p>
+                    <p onclick="addToOrder('Air Mineral')"><img src="https://via.placeholder.com/30" alt="Air Mineral">Air Mineral</p>
                 </div>
             </div>
         </div>
@@ -254,7 +264,7 @@
                 document.getElementById('dashboard').style.display = 'block';
                 document.getElementById('user-name').textContent = user.username;
             } else {
-                alert('Invalid Username or Password!');
+                alert('Invalid username or password');
             }
         });
 
@@ -262,30 +272,33 @@
         document.getElementById('logout-btn').addEventListener('click', function () {
             document.getElementById('login-form').style.display = 'block';
             document.getElementById('dashboard').style.display = 'none';
+            orders = [];
+            updateOrderList();
         });
 
-        // Toggle menu visibility
-        function toggleMenu(menuId) {
-            const menu = document.getElementById(menuId);
-            // Toggle the 'active' class to show/hide the menu
-            menu.classList.toggle('active');
+        // Toggle Menu (Makanan / Minuman)
+        function toggleMenu(menu) {
+            const menuContent = document.getElementById(menu);
+            menuContent.classList.toggle('active');
         }
 
-        // Add to order
+        // Add item to order list
         function addToOrder(item) {
             orders.push(item);
             updateOrderList();
         }
 
-        // Update the order list
+        // Update order list
         function updateOrderList() {
             const orderList = document.getElementById('order-list');
             orderList.innerHTML = '';
+
             orders.forEach(item => {
                 const li = document.createElement('li');
                 li.textContent = item;
                 orderList.appendChild(li);
             });
+
             document.getElementById('total-order').textContent = orders.length;
         }
     </script>
