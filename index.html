@@ -138,12 +138,20 @@
             color: #bf360c;
         }
 
+        /* Items container */
         .items-container {
             display: none;
             margin-top: 20px;
             padding: 20px;
             background-color: #ffe0b2;
             border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .items-container.show {
+            display: block;
+            opacity: 1;
         }
 
         .item {
@@ -241,14 +249,14 @@
 
         // Display Makanan items
         document.getElementById('makanan-card').addEventListener('click', function () {
-            document.getElementById('makanan-items').style.display = 'block';
-            document.getElementById('minuman-items').style.display = 'none';
+            document.getElementById('makanan-items').classList.add('show');
+            document.getElementById('minuman-items').classList.remove('show');
         });
 
         // Display Minuman items
         document.getElementById('minuman-card').addEventListener('click', function () {
-            document.getElementById('minuman-items').style.display = 'block';
-            document.getElementById('makanan-items').style.display = 'none';
+            document.getElementById('minuman-items').classList.add('show');
+            document.getElementById('makanan-items').classList.remove('show');
         });
     </script>
 </body>
