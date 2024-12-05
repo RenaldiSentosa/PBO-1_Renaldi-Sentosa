@@ -9,7 +9,13 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #fff8e1;
+            background-color: #f9f9f9;
+            color: #555;
+        }
+
+        h2, h3 {
+            margin: 0;
+            font-weight: bold;
         }
 
         /* Login Form Styles */
@@ -18,10 +24,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: white;
+            background-color: #fff;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             width: 300px;
             text-align: center;
         }
@@ -60,9 +66,8 @@
             display: none;
             margin: 0;
             padding: 20px;
-            width: 100%;
-            height: 100vh;
             background-color: #fff8e1;
+            min-height: 100vh;
         }
 
         .header {
@@ -72,6 +77,7 @@
             color: white;
             font-size: 24px;
             font-weight: bold;
+            border-radius: 5px;
         }
 
         .welcome {
@@ -81,6 +87,7 @@
             padding: 10px;
             background-color: #ffe0b2;
             color: #ff7043;
+            border-radius: 5px;
         }
 
         .welcome h2 {
@@ -101,6 +108,27 @@
         }
 
         /* Menu Styles */
+        .cards-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 20px;
+            width: 120px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
         .menu-container {
             display: none;
             margin-top: 20px;
@@ -116,6 +144,7 @@
             padding: 8px 0;
             display: flex;
             align-items: center;
+            font-size: 16px;
         }
 
         .menu-content p img {
@@ -134,6 +163,7 @@
 
         .order-summary h4 {
             color: #bf360c;
+            font-size: 22px;
         }
 
         .order-summary ul {
@@ -147,10 +177,26 @@
             padding: 10px;
             border-radius: 5px;
             color: #bf360c;
+            font-size: 16px;
         }
 
         .order-summary ul li span {
             font-weight: bold;
+        }
+
+        .order-summary button {
+            background-color: #ff7043;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .order-summary button:hover {
+            background-color: #e64a19;
         }
     </style>
 </head>
@@ -170,7 +216,7 @@
             <h2>Welcome, <span id="user-name"></span></h2>
             <button id="logout-btn">Logout</button>
         </div>
-        
+
         <div class="cards-container">
             <!-- Card Makanan -->
             <div class="card">
