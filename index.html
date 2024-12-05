@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makanan dan Minuman</title>
+    <title>Warung Kiting</title>
     <style>
+        /* Global Styles */
         body {
             margin: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #fff8e1;
         }
 
+        /* Login Form Styles */
         #login-form {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #ffffff;
+            background-color: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -53,6 +55,7 @@
             background-color: #e64a19;
         }
 
+        /* Dashboard Styles */
         .main-content {
             display: none;
             margin: 0;
@@ -62,13 +65,22 @@
             background-color: #fff8e1;
         }
 
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff7043;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
         .welcome {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px;
-            background-color: #ff7043;
-            color: white;
+            background-color: #ffe0b2;
+            color: #ff7043;
         }
 
         .welcome h2 {
@@ -132,6 +144,7 @@
 
     <!-- Dashboard -->
     <div id="dashboard" class="main-content">
+        <div class="header">Warung Kiting</div>
         <div class="welcome">
             <h2>Welcome, <span id="user-name"></span></h2>
             <button id="logout-btn">Logout</button>
@@ -154,8 +167,10 @@
     </div>
 
     <script>
+        // User data
         const users = [{ username: 'Renaldi', password: 'Renaldi123' }];
 
+        // Login button event
         document.getElementById('login-btn').addEventListener('click', function () {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -171,6 +186,7 @@
             }
         });
 
+        // Logout button event
         document.getElementById('logout-btn').addEventListener('click', function () {
             document.getElementById('login-form').style.display = 'block';
             document.getElementById('dashboard').style.display = 'none';
