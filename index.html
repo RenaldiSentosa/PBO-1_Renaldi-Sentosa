@@ -268,8 +268,8 @@
         <!-- Menu Minuman -->
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
-            <p onclick="addToOrder(Es Teh Manis'', 5000)">
-                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis" width="100" height="100">Teh Manis - Rp 5,000
+            <p onclick="addToOrder('Es Teh Manis', 5000)">
+                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Es Teh Manis" width="100" height="100">ES Teh Manis - Rp 5,000
             </p>
             <p onclick="addToOrder('Jus Jeruk', 8000)">
                 <img src="https://i.pinimg.com/736x/32/eb/24/32eb2481a50b38503750c9ee7408fc2a.jpg" alt="Jus Jeruk" width="100" height="100">Jus Jeruk - Rp 8,000
@@ -278,7 +278,7 @@
                 <img src="https://i.pinimg.com/736x/75/8d/55/758d55538f6e97c07b89d01005aa3dd2.jpg" alt="Es Kelapa" width="100" height="100">Es Kelapa - Rp 10,000
             </p>
             <p onclick="addToOrder('Badak Susu', 4000)">
-                <img src="https://i.pinimg.com/736x/5c/21/fd/5c21fd64db3be782faf9151c3469b9e6.jpg" alt="Es Teh" width="100" height="100">Es Teh - Rp 4,000
+                <img src="https://i.pinimg.com/736x/5c/21/fd/5c21fd64db3be782faf9151c3469b9e6.jpg" alt="Badak Susu" width="100" height="100">Badak Susu - Rp 4,000
             </p>
             <p onclick="addToOrder('Kopi', 12000)">
                 <img src="https://i.pinimg.com/736x/15/d2/9f/15d29ff436df5ccdf5834e01beef8c32.jpg" alt="Kopi" width="100" height="100">Kopi - Rp 12,000
@@ -298,23 +298,48 @@
     <script>
         let userName = '';
         const order = [];
-
+        const accounts = {
+            admin: { username: 'admin', password: 'admin' },
+            user: { username: 'user', password: 'user' }
+        };
+    
         // Login Function
-        document.getElementById('login-btn').addEventListener('click', function() {
-            userName = document.getElementById('username').value;
-            if (userName) {
+        document.getElementById('login-btn').addEventListener('click', function () {
+            const usernameInput = document.getElementById('username').value;
+            const passwordInput = document.getElementById('password').value;
+    
+            // Validate login
+            if (
+                usernameInput === accounts.admin.username &&
+                passwordInput === accounts.admin.password
+            ) {
+                alert('Login sebagai Admin berhasil');
+                userName = 'Admin';
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
                 document.getElementById('user-name').textContent = userName;
+                document.querySelector('.order-summary').style.display = 'none'; // Hide order section for Admin
+            } else if (
+                usernameInput === accounts.user.username &&
+                passwordInput === accounts.user.password
+            ) {
+                alert('Login sebagai User berhasil');
+                userName = 'User';
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('user-name').textContent = userName;
+            } else {
+                alert('Username atau Password salah!');
             }
         });
-
+    
         // Logout Function
-        document.getElementById('logout-btn').addEventListener('click', function() {
+        document.getElementById('logout-btn').addEventListener('click', function () {
             document.getElementById('dashboard').style.display = 'none';
             document.getElementById('login-form').style.display = 'block';
+            userName = '';
         });
-
+    
         // Show Menu
         function showMenu(menu) {
             const menus = document.querySelectorAll('.menu-container');
@@ -323,19 +348,23 @@
             });
             document.getElementById(`menu-${menu}`).style.display = 'block';
         }
-
+    
         // Add item to order
         function addToOrder(item, price) {
+            if (userName !== 'User') {
+                alert('Hanya User yang dapat memesan!');
+                return;
+            }
             order.push({ item, price });
             updateOrderSummary();
         }
-
+    
         // Remove item from order
         function removeFromOrder(index) {
             order.splice(index, 1);
             updateOrderSummary();
         }
-
+    
         // Update Order Summary
         function updateOrderSummary() {
             const orderList = document.getElementById('order-summary-list');
@@ -355,7 +384,7 @@
             totalLi.textContent = `Total: Rp ${total}`;
             orderList.appendChild(totalLi);
         }
-
+    
         // Checkout Function
         function checkout() {
             if (order.length === 0) {
