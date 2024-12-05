@@ -113,7 +113,6 @@
             text-align: center;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
         }
 
         .card img {
@@ -132,37 +131,6 @@
             font-weight: bold;
             color: #bf360c;
         }
-
-        /* Menu Items Styles */
-        .items-container {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #ffe0b2;
-            border-radius: 10px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .items-container.show {
-            display: block;
-            opacity: 1;
-        }
-
-        .item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background-color: white;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .item img {
-            width: 50px;
-            height: 50px;
-        }
-
     </style>
 </head>
 <body>
@@ -183,38 +151,30 @@
         </div>
         <div class="cards-container">
             <!-- Card Makanan -->
-            <div class="card" id="makanan-card">
-                <img src="https://via.placeholder.com/80?text=Makanan" alt="Logo Makanan">
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Logo Makanan">
                 <h3>Makanan</h3>
-                <p>5</p>
+                <ul>
+                    <li>Mie Goreng</li>
+                    <li>Mie Rebus</li>
+                    <li>Bala-Bala</li>
+                    <li>Tahu Goreng</li>
+                    <li>Pisang Goreng</li>
+                </ul>
             </div>
 
             <!-- Card Minuman -->
-            <div class="card" id="minuman-card">
-                <img src="https://via.placeholder.com/80?text=Minuman" alt="Logo Minuman">
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Logo Minuman">
                 <h3>Minuman</h3>
-                <p>5</p>
+                <ul>
+                    <li>Es Teh</li>
+                    <li>Es Jeruk</li>
+                    <li>Kopi</li>
+                    <li>Air Mineral</li>
+                    <li>Soda</li>
+                </ul>
             </div>
-        </div>
-
-        <!-- Menu Makanan -->
-        <div id="makanan-items" class="items-container">
-            <h3>Menu Makanan</h3>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Makanan1" alt="Makanan 1"><span>Makanan 1</span></div>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Makanan2" alt="Makanan 2"><span>Makanan 2</span></div>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Makanan3" alt="Makanan 3"><span>Makanan 3</span></div>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Makanan4" alt="Makanan 4"><span>Makanan 4</span></div>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Makanan5" alt="Makanan 5"><span>Makanan 5</span></div>
-        </div>
-
-        <!-- Menu Minuman -->
-        <div id="minuman-items" class="items-container">
-            <h3>Menu Minuman</h3>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Minuman1" alt="Minuman 1"><span>Minuman 1</span></div>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Minuman2" alt="Minuman 2"><span>Minuman 2</span></div>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Minuman3" alt="Minuman 3"><span>Minuman 3</span></div>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Minuman4" alt="Minuman 4"><span>Minuman 4</span></div>
-            <div class="item"><img src="https://via.placeholder.com/50?text=Minuman5" alt="Minuman 5"><span>Minuman 5</span></div>
         </div>
     </div>
 
@@ -242,18 +202,6 @@
         document.getElementById('logout-btn').addEventListener('click', function () {
             document.getElementById('login-form').style.display = 'block';
             document.getElementById('dashboard').style.display = 'none';
-        });
-
-        // Display Makanan items
-        document.getElementById('makanan-card').addEventListener('click', function () {
-            document.getElementById('makanan-items').classList.add('show');
-            document.getElementById('minuman-items').classList.remove('show');
-        });
-
-        // Display Minuman items
-        document.getElementById('minuman-card').addEventListener('click', function () {
-            document.getElementById('minuman-items').classList.add('show');
-            document.getElementById('makanan-items').classList.remove('show');
         });
     </script>
 </body>
