@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makanan dan Minuman</title>
     <style>
-        body {
+        /* Reset Margin */
+        body, h1, h2, p {
             margin: 0;
+            padding: 0;
+        }
+
+        body {
             font-family: Arial, sans-serif;
             background-color: #fff8e1;
             display: flex;
@@ -151,11 +156,23 @@
             font-size: 14px;
             color: gray;
         }
+
+        /* Responsive Style */
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 80%;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Login Form -->
+    <!-- Form Login -->
     <div class="login-container" id="login-container">
         <h2>Login</h2>
         <form id="loginForm">
@@ -213,6 +230,7 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
+            // Login validation
             if (username === "user" && password === "password") {
                 // Hide login form and show dashboard
                 document.getElementById("login-container").style.display = "none";
