@@ -113,6 +113,7 @@
             text-align: center;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
         }
 
         .card img {
@@ -130,6 +131,7 @@
             list-style-type: none;
             padding: 0;
             color: #bf360c;
+            display: none;
         }
 
         .card ul li {
@@ -137,10 +139,8 @@
             margin-bottom: 5px;
         }
 
-        .card p {
-            font-size: 36px;
-            font-weight: bold;
-            color: #bf360c;
+        .card.active ul {
+            display: block;
         }
     </style>
 </head>
@@ -162,7 +162,7 @@
         </div>
         <div class="cards-container">
             <!-- Card Makanan -->
-            <div class="card">
+            <div class="card" id="makanan-card">
                 <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Logo Makanan">
                 <h3>Makanan</h3>
                 <ul>
@@ -175,7 +175,7 @@
             </div>
 
             <!-- Card Minuman -->
-            <div class="card">
+            <div class="card" id="minuman-card">
                 <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Logo Minuman">
                 <h3>Minuman</h3>
                 <ul>
@@ -213,6 +213,15 @@
         document.getElementById('logout-btn').addEventListener('click', function () {
             document.getElementById('login-form').style.display = 'block';
             document.getElementById('dashboard').style.display = 'none';
+        });
+
+        // Toggle menu items visibility when clicking on the cards
+        document.getElementById('makanan-card').addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+
+        document.getElementById('minuman-card').addEventListener('click', function () {
+            this.classList.toggle('active');
         });
     </script>
 </body>
