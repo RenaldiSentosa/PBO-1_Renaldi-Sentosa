@@ -12,15 +12,11 @@
         }
 
         .hidden {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            display: none;
         }
 
         .visible {
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            display: block;
         }
 
         /* Login Form Styles */
@@ -63,19 +59,16 @@
 
         /* Dashboard Styles */
         .dashboard-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             padding: 20px;
+            text-align: center;
         }
 
         .welcome-header {
-            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #ffcc80;
             padding: 10px 20px;
+            background-color: #ffcc80;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -101,9 +94,8 @@
         .cards-container {
             display: flex;
             gap: 20px;
-            justify-content: space-around;
+            justify-content: center;
             margin-top: 20px;
-            width: 100%;
         }
 
         .card {
