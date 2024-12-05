@@ -133,10 +133,14 @@
         }
 
         /* Menu Styles */
-        .menu-content {
+        .menu-container {
             display: none;
-            margin-top: 10px;
-            text-align: left;
+            margin-top: 20px;
+        }
+
+        .menu-container h4 {
+            color: #bf360c;
+            font-size: 22px;
         }
 
         .menu-content p {
@@ -150,17 +154,6 @@
             width: 30px;
             height: 30px;
             margin-right: 10px;
-        }
-
-        .menu-content.active {
-            display: block;
-        }
-
-        .menu-button {
-            cursor: pointer;
-            color: #ff7043;
-            font-weight: bold;
-            margin-bottom: 10px;
         }
 
         /* Order Section Styles */
@@ -209,22 +202,23 @@
             <h2>Welcome, <span id="user-name"></span></h2>
             <button id="logout-btn">Logout</button>
         </div>
+        
         <div class="cards-container">
             <!-- Card Makanan -->
             <div class="card">
                 <img src="https://via.placeholder.com/80" alt="Makanan">
-                <h3 class="menu-button" onclick="toggleMenu('makanan')">Makanan</h3>
+                <h3 class="menu-button" onclick="showMenu('makanan')">Makanan</h3>
             </div>
 
             <!-- Card Minuman -->
             <div class="card">
                 <img src="https://via.placeholder.com/80" alt="Minuman">
-                <h3 class="menu-button" onclick="toggleMenu('minuman')">Minuman</h3>
+                <h3 class="menu-button" onclick="showMenu('minuman')">Minuman</h3>
             </div>
         </div>
 
         <!-- Menu Makanan -->
-        <div id="makanan" class="menu-content">
+        <div id="menu-makanan" class="menu-container">
             <h4>Menu Makanan</h4>
             <p onclick="addToOrder('Mie Goreng')"><img src="https://via.placeholder.com/30" alt="Mie Goreng">Mie Goreng</p>
             <p onclick="addToOrder('Mie Rebus')"><img src="https://via.placeholder.com/30" alt="Mie Rebus">Mie Rebus</p>
@@ -234,7 +228,7 @@
         </div>
 
         <!-- Menu Minuman -->
-        <div id="minuman" class="menu-content">
+        <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
             <p onclick="addToOrder('Teh Manis')"><img src="https://via.placeholder.com/30" alt="Teh Manis">Teh Manis</p>
             <p onclick="addToOrder('Es Jeruk')"><img src="https://via.placeholder.com/30" alt="Es Jeruk">Es Jeruk</p>
@@ -282,9 +276,13 @@
         });
 
         // Toggle Menu (Makanan / Minuman)
-        function toggleMenu(menu) {
-            const menuContent = document.getElementById(menu);
-            menuContent.classList.toggle('active');
+        function showMenu(menu) {
+            // Hide all menu containers
+            document.getElementById('menu-makanan').style.display = 'none';
+            document.getElementById('menu-minuman').style.display = 'none';
+
+            // Show selected menu
+            document.getElementById('menu-' + menu).style.display = 'block';
         }
 
         // Add item to order list
