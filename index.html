@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makanan dan Minuman</title>
     <style>
-        /* Global Styles */
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
@@ -26,44 +25,52 @@
 
         /* Login Form Styles */
         .login-container {
-            height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            background-color: #fff3e0;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffcc80;
         }
 
         .login-container h1 {
             font-size: 24px;
-            color: #ff7043;
             margin-bottom: 20px;
         }
 
         .login-container input {
-            display: block;
-            width: 250px;
+            width: 80%;
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
 
         .login-container button {
-            width: 270px;
-            padding: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
             background-color: #ff7043;
             color: white;
-            font-size: 16px;
-            cursor: pointer;
         }
 
         .login-container button:hover {
             background-color: #d84315;
         }
 
-        /* Sidebar Styles */
+        /* Dashboard Styles */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
         .sidebar {
             position: fixed;
             left: 0;
@@ -92,12 +99,6 @@
 
         .sidebar a:hover {
             text-decoration: underline;
-        }
-
-        /* Dashboard Styles */
-        .main {
-            margin-left: 250px;
-            padding: 20px;
         }
 
         .cards-container {
@@ -144,16 +145,14 @@
 <body>
     <!-- Login Form -->
     <div id="login-container" class="login-container visible">
-        <div>
-            <h1>Login</h1>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <button id="login-button">Login</button>
-        </div>
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button id="login-button">Login</button>
     </div>
 
     <!-- Dashboard -->
-    <div id="dashboard-container" class="hidden">
+    <div id="dashboard-container" class="dashboard-container hidden">
         <div class="sidebar">
             <h1>Menu</h1>
             <a href="#">Dashboard</a>
@@ -162,14 +161,14 @@
             <div class="cards-container">
                 <!-- Card Makanan -->
                 <div class="card">
-                    <img src="data:image/png;base64,[BASE64_LOGO_MAKANAN]" alt="Logo Makanan">
+                    <img src="https://via.placeholder.com/80?text=🍔" alt="Logo Makanan">
                     <h3>Makanan</h3>
                     <p>3</p>
                 </div>
 
                 <!-- Card Minuman -->
                 <div class="card">
-                    <img src="data:image/png;base64,[BASE64_LOGO_MINUMAN]" alt="Logo Minuman">
+                    <img src="https://via.placeholder.com/80?text=🍹" alt="Logo Minuman">
                     <h3>Minuman</h3>
                     <p>3</p>
                 </div>
@@ -181,18 +180,22 @@
     </div>
 
     <script>
-        // Login Logic
         document.getElementById('login-button').addEventListener('click', function () {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
             // Validasi username dan password
             if (username === "user" && password === "password") {
-                // Hide login form and show dashboard with transition
-                document.getElementById('login-container').classList.remove('visible');
-                document.getElementById('login-container').classList.add('hidden');
-                document.getElementById('dashboard-container').classList.remove('hidden');
-                document.getElementById('dashboard-container').classList.add('visible');
+                // Sembunyikan login form
+                const loginContainer = document.getElementById('login-container');
+                const dashboardContainer = document.getElementById('dashboard-container');
+
+                loginContainer.classList.remove('visible');
+                loginContainer.classList.add('hidden');
+
+                // Tampilkan dashboard
+                dashboardContainer.classList.remove('hidden');
+                dashboardContainer.classList.add('visible');
             } else {
                 alert("Username atau password salah!");
             }
