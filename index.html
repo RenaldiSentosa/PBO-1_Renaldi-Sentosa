@@ -204,6 +204,17 @@
         .order-summary button:hover {
             background-color: #e64a19;
         }
+
+        .remove-item {
+            cursor: pointer;
+            color: red;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .remove-item:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -256,7 +267,7 @@
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
             <p onclick="addToOrder('Teh Manis', 5000)">
-                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316e7b346a0d0.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
+                <img src="https://i.pinimg.com/736x/c5/a4/0d/c5a40d8ccf8a1d229a6f06d6db346a0d.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
             <p onclick="addToOrder('Es Jeruk', 7000)">
                 <img src="https://i.pinimg.com/736x/31/fb/98/31fb980d1811ef5fa9259274a82d8887.jpg" alt="Es Jeruk">Es Jeruk - Rp 7,000</p>
             <p onclick="addToOrder('Es Teh', 6000)">
@@ -310,13 +321,19 @@
             updateOrderList();
         }
 
+        // Remove item from order list
+        function removeFromOrder(index) {
+            order.splice(index, 1);
+            updateOrderList();
+        }
+
         // Update the order list
         function updateOrderList() {
             const orderList = document.getElementById("order-list");
             orderList.innerHTML = '';
-            order.forEach(function(orderItem) {
+            order.forEach(function(orderItem, index) {
                 const li = document.createElement("li");
-                li.textContent = `${orderItem.item} - Rp ${orderItem.price}`;
+                li.innerHTML = `${orderItem.item} - Rp ${orderItem.price} <span class="remove-item" onclick="removeFromOrder(${index})">Remove</span>`;
                 orderList.appendChild(li);
             });
         }
