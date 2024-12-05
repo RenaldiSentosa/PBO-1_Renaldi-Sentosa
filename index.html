@@ -141,21 +141,20 @@
             font-size: 22px;
         }
 
-        .menu-content p {
+        .menu-container p {
             cursor: pointer;
             padding: 8px 0;
             display: flex;
             align-items: center;
-            font-size: 14px;
+            font-size: 12px;
         }
 
-        .menu-content p img {
+        .menu-container p img {
             width: 40px;
             height: 40px;
             margin-right: 10px;
         }
 
-        /* Order Section Styles */
         .order-summary {
             margin-top: 30px;
             padding: 20px;
@@ -185,10 +184,6 @@
             align-items: center;
         }
 
-        .order-summary ul li span {
-            font-weight: bold;
-        }
-
         .order-summary button {
             background-color: #ff7043;
             color: white;
@@ -203,12 +198,6 @@
         .order-summary button:hover {
             background-color: #e64a19;
         }
-
-        .order-summary button:disabled {
-            background-color: #d3d3d3;
-            cursor: not-allowed;
-        }
-
     </style>
 </head>
 <body>
@@ -231,13 +220,13 @@
         <div class="cards-container">
             <!-- Card Makanan -->
             <div class="card">
-                <img src="https://i.pinimg.com/736x/e9/c5/8a/e9c58afeec6f474520e5b5a394d56971.jpg" alt="Makanan" width="90" height="90">
+                <img src="https://via.placeholder.com/90" alt="Makanan">
                 <h3 class="menu-button" onclick="showMenu('makanan')">Makanan</h3>
             </div>
 
             <!-- Card Minuman -->
             <div class="card">
-                <img src="https://i.pinimg.com/736x/fe/2e/7b/fe2e7b08396c2a6073e0455583374a43.jpg" alt="Minuman" width="90" height="90">
+                <img src="https://via.placeholder.com/90" alt="Minuman">
                 <h3 class="menu-button" onclick="showMenu('minuman')">Minuman</h3>
             </div>
         </div>
@@ -246,96 +235,10 @@
         <div id="menu-makanan" class="menu-container">
             <h4>Menu Makanan</h4>
             <p onclick="addToOrder('Mie Goreng', 15000)">
-                <img src="https://i.pinimg.com/736x/dd/88/65/dd8865338cba785b7e4fc5b0ef511321.jpg" alt="Mie Goreng">Mie Goreng - Rp 15,000</p>
+                <img src="https://via.placeholder.com/40" alt="Mie Goreng">Mie Goreng - Rp 15,000</p>
             <p onclick="addToOrder('Mie Rebus', 14000)">
-                <img src="https://i.pinimg.com/736x/87/b7/25/87b7253554790eb1ee3ff3b9f4b3e2a2.jpg" alt="Mie Rebus">Mie Rebus - Rp 14,000</p>
-            <p onclick="addToOrder('Bala-Bala', 5000)">
-                <img src="https://i.pinimg.com/736x/ea/61/a1/ea61a12fa3c21cdc8ebe6a237f489744.jpg" alt="Bala-Bala">Bala-Bala - Rp 5,000</p>
-            <p onclick="addToOrder('Tahu Goreng', 7000)">
-                <img src="https://i.pinimg.com/736x/b5/2d/73/b52d738a062ceb6e0f0c68ba67ec9a3a.jpg" alt="Tahu Goreng">Tahu Goreng - Rp 7,000</p>
-            <p onclick="addToOrder('Pisang Goreng', 8000)">
-                <img src="https://i.pinimg.com/736x/fd/4b/4f/fd4b4ff0537ea6730e7c212035cced2d.jpg" alt="Pisang Goreng">Pisang Goreng - Rp 8,000</p>
-        </div>
-
-        <!-- Menu Minuman -->
-        <div id="menu-minuman" class="menu-container">
-            <h4>Menu Minuman</h4>
-            <p onclick="addToOrder('Es Teh', 7000)">
-                <img src="https://i.pinimg.com/736x/e0/fe/97/e0fe97a118b16e36df7e020d7b4299ec.jpg" alt="Es Teh">Es Teh - Rp 7,000</p>
-            <p onclick="addToOrder('Jeruk Peras', 6000)">
-                <img src="https://i.pinimg.com/736x/ae/69/36/ae693634f99bc97b6232cf20a5e72c82.jpg" alt="Jeruk Peras">Jeruk Peras - Rp 6,000</p>
-        </div>
-
-        <!-- Pesanan -->
-        <div id="order-summary" class="order-summary">
-            <h4>Pesanan</h4>
-            <ul id="order-list"></ul>
-            <button id="checkout-btn" onclick="checkout()">Bayar</button>
+                <img src="https://via.placeholder.com/40" alt="Mie Rebus">Mie Rebus - Rp 14,000</p>
         </div>
     </div>
-
-    <script>
-        // JavaScript Code
-        let username = '';
-        let order = [];
-
-        function login() {
-            username = document.getElementById('username').value;
-            if (username) {
-                document.getElementById('login-form').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-                document.getElementById('user-name').textContent = username;
-            }
-        }
-
-        function logout() {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('dashboard').style.display = 'none';
-            username = '';
-        }
-
-        function showMenu(menu) {
-            document.getElementById('menu-makanan').style.display = menu === 'makanan' ? 'block' : 'none';
-            document.getElementById('menu-minuman').style.display = menu === 'minuman' ? 'block' : 'none';
-        }
-
-        function addToOrder(item, price) {
-            order.push({ item, price });
-            updateOrderSummary();
-        }
-
-        function updateOrderSummary() {
-            const orderList = document.getElementById('order-list');
-            orderList.innerHTML = '';
-            let total = 0;
-            order.forEach(orderItem => {
-                const li = document.createElement('li');
-                li.textContent = `${orderItem.item} - Rp ${orderItem.price}`;
-                const removeBtn = document.createElement('button');
-                removeBtn.textContent = 'Remove';
-                removeBtn.onclick = () => removeFromOrder(orderItem);
-                li.appendChild(removeBtn);
-                orderList.appendChild(li);
-                total += orderItem.price;
-            });
-            const totalLi = document.createElement('li');
-            totalLi.textContent = `Total: Rp ${total}`;
-            orderList.appendChild(totalLi);
-        }
-
-        function removeFromOrder(orderItem) {
-            order = order.filter(item => item !== orderItem);
-            updateOrderSummary();
-        }
-
-        function checkout() {
-            alert('Pembayaran berhasil!');
-            order = [];
-            updateOrderSummary();
-        }
-
-        document.getElementById('login-btn').addEventListener('click', login);
-        document.getElementById('logout-btn').addEventListener('click', logout);
-    </script>
 </body>
 </html>
