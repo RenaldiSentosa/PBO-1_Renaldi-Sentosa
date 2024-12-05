@@ -5,177 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Warung Kiting</title>
     <style>
-        /* Global Styles */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #fff8e1;
-        }
-
-        /* Login Form Styles */
-        #login-form {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            text-align: center;
-        }
-
-        #login-form h2 {
-            margin-bottom: 20px;
-            color: #ff7043;
-        }
-
-        #login-form input {
-            width: 90%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        #login-form button {
-            width: 95%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff7043;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #login-form button:hover {
-            background-color: #e64a19;
-        }
-
-        /* Dashboard Styles */
-        .main-content {
-            display: none;
-            margin: 0;
-            padding: 20px;
-            width: 100%;
-            height: 100vh;
-            background-color: #fff8e1;
-        }
-
-        .header {
-            text-align: center;
-            padding: 20px;
-            background-color: #ff7043;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .welcome {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #ffe0b2;
-            color: #ff7043;
-        }
-
-        .welcome h2 {
-            margin: 0;
-        }
-
-        .welcome button {
-            background: #e64a19;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            padding: 8px 16px;
-            border: none;
-        }
-
-        .welcome button:hover {
-            background: #bf360c;
-        }
-
-        .cards-container {
-            display: flex;
-            justify-content: space-evenly;
-            margin-top: 20px;
-        }
-
-        .card {
-            background-color: #ffe0b2;
-            border-radius: 10px;
-            width: 45%;
-            text-align: center;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .card img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 10px;
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            color: #bf360c;
-        }
-
-        .menu-container {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .menu-container h4 {
-            color: #bf360c;
-            font-size: 22px;
-        }
-
-        .menu-content p {
-            cursor: pointer;
-            padding: 8px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .menu-content p img {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-        }
-
-        .order-summary {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #ffe0b2;
-            border-radius: 10px;
-        }
-
-        .order-summary h4 {
-            color: #bf360c;
-        }
-
-        .order-summary ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .order-summary ul li {
-            background-color: #fff;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            color: #bf360c;
-        }
-
-        .order-summary ul li span {
-            font-weight: bold;
-        }
+        /* Tambahkan style di sini */
     </style>
 </head>
 <body>
@@ -197,11 +27,9 @@
         
         <div class="cards-container">
             <div class="card">
-                <img src="https://via.placeholder.com/80" alt="Makanan">
                 <h3 class="menu-button" onclick="showMenu('makanan')">Makanan</h3>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/80" alt="Minuman">
                 <h3 class="menu-button" onclick="showMenu('minuman')">Minuman</h3>
             </div>
         </div>
@@ -216,32 +44,30 @@
             <ul id="order-list"></ul>
             <p><strong>Total Makanan & Minuman yang Dipesan: </strong><span id="total-order">0</span></p>
             <p><strong>Total Harga: </strong><span id="total-price">Rp 0</span></p>
+            <button id="pay-btn" onclick="bayarPesanan()">Bayar Pesanan</button>
         </div>
     </div>
 
     <script>
-        // User data
+        // Data User dan Menu
         const users = [{ username: 'Renaldi', password: 'Renaldi123' }];
         const menuItems = {
             makanan: [
                 { name: "Mie Goreng", price: 15000 },
                 { name: "Mie Rebus", price: 14000 },
-                { name: "Bala-Bala", price: 5000 },
-                { name: "Tahu Goreng", price: 4000 },
-                { name: "Pisang Goreng", price: 7000 }
+                { name: "Bala-Bala", price: 5000 }
             ],
             minuman: [
                 { name: "Teh Manis", price: 5000 },
                 { name: "Es Jeruk", price: 7000 },
-                { name: "Jus Mangga", price: 15000 },
-                { name: "Kopi", price: 10000 },
-                { name: "Air Mineral", price: 3000 }
+                { name: "Kopi", price: 10000 }
             ]
         };
 
         let orders = [];
         let totalPrice = 0;
 
+        // Fungsi Login
         document.getElementById('login-btn').addEventListener('click', function () {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -252,10 +78,11 @@
                 document.getElementById('dashboard').style.display = 'block';
                 document.getElementById('user-name').textContent = user.username;
             } else {
-                alert('Invalid username or password');
+                alert('Username atau Password salah!');
             }
         });
 
+        // Fungsi Logout
         document.getElementById('logout-btn').addEventListener('click', function () {
             document.getElementById('login-form').style.display = 'block';
             document.getElementById('dashboard').style.display = 'none';
@@ -264,6 +91,7 @@
             updateOrderList();
         });
 
+        // Menampilkan Menu
         function showMenu(menu) {
             const menuContainer = document.getElementById('menu-' + menu);
             menuContainer.innerHTML = '';
@@ -274,32 +102,53 @@
 
             menuItems[menu].forEach(item => {
                 const p = document.createElement('p');
-                p.innerHTML = `<img src="https://via.placeholder.com/30" alt="${item.name}">${item.name} - Rp ${item.price}`;
-                p.onclick = () => addToOrder(item.name, item.price);
+                p.innerHTML = `${item.name} - Rp ${item.price} <button onclick="addToOrder('${item.name}', ${item.price})">Tambah</button>`;
                 menuContainer.appendChild(p);
             });
 
             menuContainer.style.display = 'block';
         }
 
+        // Menambah Pesanan
         function addToOrder(itemName, itemPrice) {
             orders.push({ name: itemName, price: itemPrice });
             totalPrice += itemPrice;
             updateOrderList();
         }
 
+        // Menghapus Pesanan
+        function removeFromOrder(index) {
+            totalPrice -= orders[index].price;
+            orders.splice(index, 1);
+            updateOrderList();
+        }
+
+        // Memperbarui Daftar Pesanan
         function updateOrderList() {
             const orderList = document.getElementById('order-list');
             orderList.innerHTML = '';
 
-            orders.forEach(order => {
+            orders.forEach((order, index) => {
                 const li = document.createElement('li');
-                li.innerHTML = `${order.name} - <span>Rp ${order.price}</span>`;
+                li.innerHTML = `${order.name} - Rp ${order.price} <button onclick="removeFromOrder(${index})">Hapus</button>`;
                 orderList.appendChild(li);
             });
 
             document.getElementById('total-order').textContent = orders.length;
             document.getElementById('total-price').textContent = `Rp ${totalPrice}`;
+        }
+
+        // Fungsi Bayar Pesanan
+        function bayarPesanan() {
+            if (orders.length === 0) {
+                alert('Tidak ada pesanan untuk dibayar!');
+                return;
+            }
+
+            alert(`Total pembayaran Anda adalah Rp ${totalPrice}. Terima kasih telah memesan!`);
+            orders = [];
+            totalPrice = 0;
+            updateOrderList();
         }
     </script>
 </body>
