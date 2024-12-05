@@ -112,6 +112,7 @@
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .card {
@@ -119,10 +120,11 @@
             border: 1px solid #e0e0e0;
             border-radius: 5px;
             padding: 20px;
-            width: 120px;
+            width: 150px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s;
+            margin-bottom: 15px;
         }
 
         .card:hover {
@@ -251,73 +253,73 @@
             <h4>Menu Minuman</h4>
             <p onclick="addToOrder('Teh Manis', 5000)">
                 <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
-            <p onclick="addToOrder('Es Jeruk', 7000)">
-                <img src="https://i.pinimg.com/736x/32/eb/24/32eb2481a50b38503750c9ee7408fc2a.jpg" alt="Es Jeruk">Es Jeruk - Rp 7,000</p>
-            <p onclick="addToOrder('Jus Mangga', 8000)">
-                <img src="https://i.pinimg.com/736x/e7/69/da/e769da2b0747f496eddcc24bd707983d.jpg" alt="Jus Mangga">Jus Mangga - Rp 8,000</p>
-            <p onclick="addToOrder('Kopi', 10000)">
-                <img src="https://i.pinimg.com/736x/15/d2/9f/15d29ff436df5ccdf5834e01beef8c32.jpg" alt="Kopi">Kopi - Rp 10,000</p>
-            <p onclick="addToOrder('Air Mineral', 3000)">
-                <img src="https://i.pinimg.com/736x/e2/d0/dd/e2d0ddf3f5fc0345422834c67c5b888b.jpg" alt="Air Mineral">Air Mineral - Rp 3,000</p>
+            <p onclick="addToOrder('Es Teh', 7000)">
+                <img src="https://i.pinimg.com/736x/e0/fe/97/e0fe97a118b16e36df7e020d7b4299ec.jpg" alt="Es Teh">Es Teh - Rp 7,000</p>
+            <p onclick="addToOrder('Jeruk Peras', 6000)">
+                <img src="https://i.pinimg.com/736x/ae/69/36/ae693634f99bc97b6232cf20a5e72c82.jpg" alt="Jeruk Peras">Jeruk Peras - Rp 6,000</p>
         </div>
 
         <!-- Order Summary -->
-        <div class="order-summary">
-            <h4>Pesanan Anda</h4>
+        <div id="order-summary" class="order-summary">
+            <h4>Order Summary</h4>
             <ul id="order-list"></ul>
-            <p><strong>Total Makanan & Minuman yang Dipesan: </strong><span id="total-order">0</span></p>
-            <p><strong>Total Harga: </strong><span id="total-price">Rp 0</span></p>
-            <button id="checkout-btn">Checkout</button>
+            <button id="checkout-btn" onclick="checkout()">Bayar</button>
         </div>
     </div>
 
     <script>
-        // Handle Login
-        document.getElementById('login-btn').addEventListener('click', function() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        // JavaScript Code
+        let username = '';
+        let order = [];
 
-            // Username and password check
-            const validUsername = 'admin';
-            const validPassword = 'password123';
-
-            if (username === validUsername && password === validPassword) {
-                document.getElementById('user-name').innerText = username;
+        function login() {
+            username = document.getElementById('username').value;
+            if (username) {
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
-            } else {
-                alert('Invalid username or password');
-            }
-        });
-
-        // Handle Logout
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('login-form').style.display = 'block';
-        });
-
-        // Show Menu (Makanan/Minuman)
-        function showMenu(menuType) {
-            if (menuType === 'makanan') {
-                document.getElementById('menu-makanan').style.display = 'block';
-                document.getElementById('menu-minuman').style.display = 'none';
-            } else if (menuType === 'minuman') {
-                document.getElementById('menu-minuman').style.display = 'block';
-                document.getElementById('menu-makanan').style.display = 'none';
+                document.getElementById('user-name').textContent = username;
             }
         }
 
-        // Add to Order
-        let order = [];
-        let totalPrice = 0;
+        function logout() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+            username = '';
+        }
+
+        function showMenu(menu) {
+            document.getElementById('menu-makanan').style.display = menu === 'makanan' ? 'block' : 'none';
+            document.getElementById('menu-minuman').style.display = menu === 'minuman' ? 'block' : 'none';
+        }
 
         function addToOrder(item, price) {
-            order.push(item);
-            totalPrice += price;
-            document.getElementById('order-list').innerHTML = order.map(i => `<li>${i}</li>`).join('');
-            document.getElementById('total-order').innerText = order.length;
-            document.getElementById('total-price').innerText = 'Rp ' + totalPrice;
+            order.push({ item, price });
+            updateOrderSummary();
         }
+
+        function updateOrderSummary() {
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = '';
+            let total = 0;
+            order.forEach(orderItem => {
+                const li = document.createElement('li');
+                li.textContent = `${orderItem.item} - Rp ${orderItem.price}`;
+                orderList.appendChild(li);
+                total += orderItem.price;
+            });
+            const totalLi = document.createElement('li');
+            totalLi.textContent = `Total: Rp ${total}`;
+            orderList.appendChild(totalLi);
+        }
+
+        function checkout() {
+            alert('Pembayaran berhasil!');
+            order = [];
+            updateOrderSummary();
+        }
+
+        document.getElementById('login-btn').addEventListener('click', login);
+        document.getElementById('logout-btn').addEventListener('click', logout);
     </script>
 </body>
 </html>
