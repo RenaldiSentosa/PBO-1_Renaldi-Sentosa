@@ -139,39 +139,18 @@
             font-size: 22px;
         }
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            padding: 10px;
-        }
-
-        .menu-item {
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            text-align: center;
-            padding: 10px;
+        .menu-content p {
             cursor: pointer;
-            transition: transform 0.3s ease;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
         }
 
-        .menu-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .menu-item:hover {
-            transform: scale(1.05);
-            background-color: #f5f5f5;
-        }
-
-        .menu-item span {
-            display: block;
-            margin-top: 10px;
-            color: #ff7043;
-            font-weight: bold;
+        .menu-content p img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
         }
 
         /* Order Section Styles */
@@ -255,55 +234,29 @@
         <!-- Menu Makanan -->
         <div id="menu-makanan" class="menu-container">
             <h4>Menu Makanan</h4>
-            <div class="menu-grid">
-                <div class="menu-item" onclick="addToOrder('Mie Goreng', 15000)">
-                    <img src="https://i.pinimg.com/736x/dd/88/65/dd8865338cba785b7e4fc5b0ef511321.jpg" alt="Mie Goreng">
-                    <span>Mie Goreng - Rp 15,000</span>
-                </div>
-                <div class="menu-item" onclick="addToOrder('Mie Rebus', 14000)">
-                    <img src="https://i.pinimg.com/736x/87/b7/25/87b7253554790eb1ee3ff3b9f4b3e2a2.jpg" alt="Mie Rebus">
-                    <span>Mie Rebus - Rp 14,000</span>
-                </div>
-                <div class="menu-item" onclick="addToOrder('Bala-Bala', 5000)">
-                    <img src="https://i.pinimg.com/736x/ea/61/a1/ea61a12fa3c21cdc8ebe6a237f489744.jpg" alt="Bala-Bala">
-                    <span>Bala-Bala - Rp 5,000</span>
-                </div>
-                <div class="menu-item" onclick="addToOrder('Tahu Goreng', 7000)">
-                    <img src="https://i.pinimg.com/736x/b5/2d/73/b52d738a062ceb6e0f0c68ba67ec9a3a.jpg" alt="Tahu Goreng">
-                    <span>Tahu Goreng - Rp 7,000</span>
-                </div>
-                <div class="menu-item" onclick="addToOrder('Pisang Goreng', 8000)">
-                    <img src="https://i.pinimg.com/736x/fd/03/fc/fd03fc752571f9090ccf915ddec9dd49.jpg" alt="Pisang Goreng">
-                    <span>Pisang Goreng - Rp 8,000</span>
-                </div>
-            </div>
+            <p onclick="addToOrder('Mie Goreng', 15000)">
+                <img src="https://i.pinimg.com/736x/dd/88/65/dd8865338cba785b7e4fc5b0ef511321.jpg" alt="Mie Goreng">Mie Goreng - Rp 15,000</p>
+            <p onclick="addToOrder('Mie Rebus', 14000)">
+                <img src="https://i.pinimg.com/736x/87/b7/25/87b7253554790eb1ee3ff3b9f4b3e2a2.jpg" alt="Mie Rebus">Mie Rebus - Rp 14,000</p>
+            <p onclick="addToOrder('Bala-Bala', 5000)">
+                <img src="https://i.pinimg.com/736x/ea/61/a1/ea61a12fa3c21cdc8ebe6a237f489744.jpg" alt="Bala-Bala">Bala-Bala - Rp 5,000</p>
+            <p onclick="addToOrder('Tahu Goreng', 7000)">
+                <img src="https://i.pinimg.com/736x/b5/2d/73/b52d738a062ceb6e0f0c68ba67ec9a3a.jpg" alt="Tahu Goreng">Tahu Goreng - Rp 7,000</p>
+            <p onclick="addToOrder('Pisang Goreng', 8000)">
+                <img src="https://i.pinimg.com/736x/fd/03/fc/fd03fc752571f9090ccf915ddec9dd49.jpg" alt="Pisang Goreng">Pisang Goreng - Rp 8,000</p>
         </div>
 
         <!-- Menu Minuman -->
         <div id="menu-minuman" class="menu-container">
             <h4>Menu Minuman</h4>
-            <div class="menu-grid">
-                <div class="menu-item" onclick="addToOrder('Teh Manis', 5000)">
-                    <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis">
-                    <span>Teh Manis - Rp 5,000</span>
-                </div>
-                <div class="menu-item" onclick="addToOrder('Es Jeruk', 7000)">
-                    <img src="https://i.pinimg.com/736x/32/eb/24/32eb2481a50b38503750c9ee7408fc2a.jpg" alt="Es Jeruk">
-                    <span>Es Jeruk - Rp 7,000</span>
-                </div>
-                <div class="menu-item" onclick="addToOrder('Jus Mangga', 8000)">
-                    <img src="https://i.pinimg.com/736x/e7/69/da/e769da2b0747f496eddcc24bd707983d.jpg" alt="Jus Mangga">
-                    <span>Jus Mangga - Rp 8,000</span>
-                </div>
-                <div class="menu-item" onclick="addToOrder('Kopi', 10000)">
-                    <img src="https://i.pinimg.com/736x/15/d2/9f/15d29ff436df5ccdf5834e01beef8c32.jpg" alt="Kopi">
-                    <span>Kopi - Rp 10,000</span>
-                </div>
-                <div class="menu-item" onclick="addToOrder('Air Mineral', 3000)">
-                    <img src="https://i.pinimg.com/736x/e2/d0/dd/e2d0ddf3f5fc0345422834c67c5b888b.jpg" alt="Air Mineral">
-                    <span>Air Mineral - Rp 3,000</span>
-                </div>
-            </div>
+            <p onclick="addToOrder('Teh Manis', 5000)">
+                <img src="https://i.pinimg.com/736x/ac/7f/a4/ac7fa48e18660dca5b3316cc7d492174.jpg" alt="Teh Manis">Teh Manis - Rp 5,000</p>
+            <p onclick="addToOrder('Es Jeruk', 7000)">
+                <img src="https://i.pinimg.com/736x/62/16/7e/62167e876a0c9a16b5f694beed56c407.jpg" alt="Es Jeruk">Es Jeruk - Rp 7,000</p>
+            <p onclick="addToOrder('Es Teh', 6000)">
+                <img src="https://i.pinimg.com/736x/9b/66/64/9b6664ca0c9bc7f3c2e680db207a2c77.jpg" alt="Es Teh">Es Teh - Rp 6,000</p>
+            <p onclick="addToOrder('Kopi', 8000)">
+                <img src="https://i.pinimg.com/736x/6e/42/ed/6e42ed9b462b0e9fd5ad1938b586b56d.jpg" alt="Kopi">Kopi - Rp 8,000</p>
         </div>
 
         <!-- Order Summary -->
@@ -318,19 +271,26 @@
         let userName = '';
         let order = [];
 
+        // Define valid username and password
+        const validUsername = 'admin';
+        const validPassword = 'admin';
+
         // Handle login
         document.getElementById('login-btn').addEventListener('click', function() {
             userName = document.getElementById('username').value;
-            if (userName) {
+            let password = document.getElementById('password').value;
+
+            // Check if username and password match
+            if (userName === validUsername && password === validPassword) {
                 document.getElementById('login-form').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
                 document.getElementById('user-name').innerText = userName;
             } else {
-                alert('Please enter a username');
+                alert('Invalid username or password');
             }
         });
 
-        // Show the menu
+        // Show menu
         function showMenu(menuType) {
             if (menuType === 'makanan') {
                 document.getElementById('menu-makanan').style.display = 'block';
@@ -347,12 +307,12 @@
             displayOrder();
         }
 
-        // Display the current order
+        // Display order
         function displayOrder() {
             let orderList = document.getElementById('order-list');
             orderList.innerHTML = '';
             let total = 0;
-            order.forEach((orderItem, index) => {
+            order.forEach((orderItem) => {
                 total += orderItem.price;
                 let li = document.createElement('li');
                 li.innerHTML = `${orderItem.item} - Rp ${orderItem.price}`;
