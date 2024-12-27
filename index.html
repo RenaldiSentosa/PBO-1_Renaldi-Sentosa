@@ -211,8 +211,22 @@
         .order-summary button:hover {
             background-color: #e64a19;
         }
-    </style>
+  </style>
     <link rel="icon" href="https://i.pinimg.com/736x/57/65/ea/5765ead45fcdf3fc97f3e35b2afeb175.jpg" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker berhasil diregistrasi:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker gagal diregistrasi:', error);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <!-- Login Form -->
