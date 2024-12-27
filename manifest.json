@@ -1,0 +1,21 @@
+{
+  "name": "Warung Kiting",
+  "short_name": "WARMITING",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f9f9f9",
+  "theme_color": "#ff7043",
+  "description": "Aplikasi pemesanan makanan dan minuman.",
+  "icons": [
+    {
+      "src": "https://i.pinimg.com/736x/57/65/ea/5765ead45fcdf3fc97f3e35b2afeb175.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.pinimg.com/736x/57/65/ea/5765ead45fcdf3fc97f3e35b2afeb175.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
