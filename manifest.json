@@ -1,7 +1,6 @@
 {
   "name": "Warung Kiting",
   "short_name": "WARMITING",
-  "description": "Aplikasi Warung Kiting untuk kemudahan pelanggan.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -18,9 +17,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "scope": "/",
-  "orientation": "portrait",
-  "categories": ["shopping", "food", "utilities"],
-  "lang": "id-ID"
+  ]
 }
