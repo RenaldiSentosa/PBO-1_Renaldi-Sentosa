@@ -1,36 +1,41 @@
-const CACHE_NAME = 'warung-kiting-cache-v1';
+const CACHE_NAME = 'warung-kiting-v1';
 const urlsToCache = [
-  './',
-  './manifest.json',
-  './style.css', // Tambahkan jika ada file CSS eksternal
-  './script.js', // Tambahkan jika ada file JS eksternal
+  '/',
+  '/index.html',
+  '/manifest.json',
+  'https://i.pinimg.com/736x/57/65/ea/5765ead45fcdf3fc97f3e35b2afeb175.jpg', // Icon
+  // Tambahkan URL lain seperti CSS, JS, dan gambar menu
 ];
 
-// Install service worker
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    })
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
   );
 });
 
-// Fetch data from cache or network
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request)
+      .then(response => {
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      })
   );
 });
 
-// Update service worker
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(cacheNames => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
+        cacheNames.map(cacheName => {
           if (!cacheWhitelist.includes(cacheName)) {
             return caches.delete(cacheName);
           }
